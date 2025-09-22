@@ -43,7 +43,7 @@ class EventsController extends Controller
         $event = EventModel::find($id);
         $TokenHistory = TokenBatchModel::where('event_id', '=', $id)->get();
 
-        $TotalToken = TokenModel::count();
+        $TotalToken = TokenModel::where('event_id', '=', $id)->count();
         $RegisteredUsers = 10;
         $TokenClaimed = TokenModel::where('status', '=', 'used')->count();
 

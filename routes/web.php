@@ -19,8 +19,8 @@ Route::get('/dashboard/overview', function () {
 
 
 /************
-*   Events
-*************/
+ *   Events
+ *************/
 Route::get('/events/overview', [EventsController::class, 'index'])->name('events.index');
 Route::get('/events/create', [EventsController::class, 'create'])->name('events.create');
 Route::post('/events/store', [EventsController::class, 'store'])->name('events.store');
@@ -28,27 +28,29 @@ Route::get('/events/show/{id}', [EventsController::class, 'show'])->name('events
 
 
 /************
-*   Tokens
-*************/
+ *   Tokens
+ *************/
 Route::post('/token/generate/{event_id}', [GenerateTokenController::class, 'generateTokens'])->name('generate.token');
 
+Route::get('test', fn () => phpinfo());
 
 /************
-*   Participants
-*************/
+ *   Participants
+ *************/
 
 
 
 /************
-*
-* Tokens
-*   
-*************/
+ *
+ * Tokens
+ *   
+ *************/
 Route::get('/events/{event_id}/token/{batch_id}', [TokenController::class, 'show'])->name('tokens.show');
+Route::get('/tokens/{event_id}/{batch_id}/download', [TokenController::class, 'download'])->name('tokens.download');
 
 
 
 
 /************
-*   Testing Registration
-*************/
+ *   Testing Registration
+ *************/

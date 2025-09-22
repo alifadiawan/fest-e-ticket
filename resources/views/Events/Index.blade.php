@@ -35,7 +35,7 @@
             <tbody class="divide-y divide-zinc-700">
                 @foreach ($events as $item)
                     <tr>
-                        <td class="px-6 py-4 text-sm text-gray-400">1</td>
+                        <td class="px-6 py-4 text-sm text-gray-400">{{ $loop->iteration }}</td>
                         <td class="px-6 py-4 text-sm text-white font-medium">{{ $item->name }}</td>
                         <td class="px-6 py-4 text-sm text-gray-400">{{ $item->created_at }}</td>
                         <td class="px-6 py-4 text-sm">

@@ -31,51 +31,54 @@ class GenerateTokensJob implements ShouldQueue
     public function handle(): void
     {
         $event = EventModel::findOrFail($this->eventId);
-        $tokens = [];
+        $batchId = Str::uuid();
 
-        $batchId = Str::uuid(); // new batch UUID
-
-        DB::table('token_batches')->insert([
-            'id'        => $batchId,
-            'event_id'  => $this->eventId,
-            'count'     => $this->count,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        for ($i = 0; $i < $this->count; $i++) {
-            $token = $this->generateUniqueToken($event->id, $this->tokenLength);
-
-            $tokens[] = [
-                'id'        => Str::uuid(),
+        DB::transaction(function () use ($event, $batchId) {
+            // Buat record batch
+            DB::table('token_batches')->insert([
+                'id'        => $batchId,
                 'event_id'  => $event->id,
-                'token'     => $token,
-                'batch_id'   => $batchId,
-                'status'    => 'unused',
+                'count'     => $this->count,
                 'created_at' => now(),
-            ];
+            ]);
 
-            if (count($tokens) >= 1000) {
-                DB::table('tokens')->insert($tokens);
-                $tokens = [];
+            // Generate token unik di memory
+            $tokens = collect();
+            $prefix = strtoupper(substr($event->id, 0, 3));
+
+            while ($tokens->count() < $this->count) {
+                $needed = $this->count - $tokens->count();
+
+                $newTokens = collect(range(1, $needed))->map(
+                    fn() =>
+                    $prefix . strtoupper(Str::random($this->tokenLength - strlen($prefix)))
+                );
+
+                $tokens = $tokens->merge($newTokens)->unique();
             }
-        }
 
-        if (!empty($tokens)) {
-            DB::table('tokens')->insert($tokens);
-        }
+            // Potong sesuai jumlah pasti
+            $tokens = $tokens->take($this->count);
+
+            // Batch insert
+            foreach ($tokens->chunk(5000) as $chunk) {
+                $rows = $chunk->map(fn($token) => [
+                    'id'         => Str::uuid(),
+                    'event_id'   => $event->id,
+                    'token'      => $token,
+                    'batch_id'   => $batchId,
+                    'status'     => 'unused',
+                    'created_at' => now(),
+                ])->toArray();
+
+                DB::table('tokens')->insert($rows);
+            }
+        });
     }
 
-    private function generateUniqueToken(string $eventId, int $length): string
+    private function generateToken(string $eventId, int $length): string
     {
         $prefix = strtoupper(substr($eventId, 0, 3));
-
-        do {
-            $token = $prefix . strtoupper(Str::random($length - strlen($prefix)));
-        } while (
-            DB::table('tokens')->where('token', $token)->where('event_id', $eventId)->exists()
-        );
-
-        return $token;
+        return $prefix . strtoupper(Str::random($length - strlen($prefix)));
     }
 }

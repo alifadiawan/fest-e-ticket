@@ -60,7 +60,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $item->created_at }}</td>
                     <td class="px-6 py-4 text-sm font-medium space-x-4">
                         <a href="{{ route('tokens.show', ['event_id' => $event->id, 'batch_id' => $item->id]) }}" class="text-blue-400 hover:text-blue-300">View</a>
-                        <a href="" class="text-green-400 hover:text-blue-300">Download</a>
+                        <a href="{{ route('tokens.download', ['event_id' => $event->id, 'batch_id' => $item->id]) }}" class="text-green-400 hover:text-blue-300">Download</a>
 
                     </td>   
                 </tr>
