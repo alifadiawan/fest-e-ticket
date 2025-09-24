@@ -28,7 +28,7 @@
             vertical-align: bottom;
             border: 1px solid #ccc; /* optional */
             padding-bottom: 13px;
-            background: url('{{ asset('anders-jilden-cYrMQA7a3Wc-unsplash.jpg') }}') no-repeat center center;
+            background: url("{{ public_path('ticket-background.jpg') }}") no-repeat center center;
             background-size: cover;
         }
 
@@ -41,6 +41,7 @@
         .token {
             font-size: 7pt;
             padding-bottom: 35px;
+            color: white;
             word-wrap: break-word;
         }
 
