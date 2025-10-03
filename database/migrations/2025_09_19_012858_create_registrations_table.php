@@ -12,10 +12,9 @@ return new class extends Migration {
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignUuid('event_id')->constrained('events')->cascadeOnDelete();
             $table->foreignUuid('token_id')->constrained('tokens')->cascadeOnDelete();
-            $table->json('data')->nullable();
             $table->string('ticket_path')->nullable(); 
             $table->string('certificate_path')->nullable();
             $table->timestamps();

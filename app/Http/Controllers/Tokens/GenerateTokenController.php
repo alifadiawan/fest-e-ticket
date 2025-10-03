@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Tokens;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\GenerateTokensJob;
-use App\Models\EventModel;
-use Illuminate\Support\Str;
-use App\Models\TokenModel;
+use App\Models\TokenBatchModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class GenerateTokenController extends Controller
 {

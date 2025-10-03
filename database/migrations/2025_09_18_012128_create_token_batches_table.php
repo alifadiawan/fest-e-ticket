@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('token_batches', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('event_id')->constrained('events')->cascadeOnDelete();
+             $table->boolean('is_generating')->default(false);
             $table->integer('count'); // number of tokens in this batch
             $table->timestamps();
         });

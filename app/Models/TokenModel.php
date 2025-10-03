@@ -8,6 +8,7 @@ class TokenModel extends Model
 {
     protected $table = 'tokens';
     protected $keyType = 'string';
+    protected $guarded = [];
     public $incrementing = false;
 
     public function event()

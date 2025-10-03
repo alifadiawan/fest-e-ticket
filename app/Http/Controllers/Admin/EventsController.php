@@ -41,7 +41,7 @@ class EventsController extends Controller
     public function show($id)
     {
         $event = EventModel::find($id);
-        $TokenHistory = TokenBatchModel::where('event_id', '=', $id)->get();
+        $TokenHistory = TokenBatchModel::where('event_id', '=', $id)->latest()->get();
 
         $TotalToken = TokenModel::where('event_id', '=', $id)->count();
         $RegisteredUsers = 10;

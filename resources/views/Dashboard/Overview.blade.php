@@ -19,7 +19,7 @@
                 </div>
                 <div>
                     <h3 class="text-gray-400 text-sm">Total Events</h3>
-                    <p class="text-white font-bold text-2xl mt-2">23</p>
+                    <p class="text-white font-bold text-2xl mt-2">{{ $totalEvent }}</p>
                 </div>
             </div>
 
@@ -43,8 +43,8 @@
             <div class="bg-primary rounded-2xl shadow-lg p-6 w-64 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Dollar Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3m0-6v6m0 6v2m0-16V4m-6 6H4m16 0h-2" />
                     </svg>
@@ -59,8 +59,8 @@
             <div class="bg-primary rounded-2xl shadow-lg p-6 w-64 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Users Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M17 20h5v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2h5m0-6a4 4 0 100-8 4 4 0 000 8zm10 0a4 4 0 100-8 4 4 0 000 8z" />
                     </svg>
@@ -75,72 +75,34 @@
         <h1 class="font-bold text-2xl mt-12">Ongoing Events</h1>
         <div class="shadow-lg mt-8">
 
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Event Card -->
-                <div class="bg-secondary rounded-xl p-5 shadow hover:scale-103 transform transition">
-                    <h4 class="text-white font-bold text-lg">Music Festival 2025</h4>
-                    <p class="text-gray-400 text-sm">Jakarta Convention Center</p>
+                @foreach ($event as $item)
+                    <!-- Event Card -->
+                    <a href="{{ route('events.show', $item->id) }}">
+                        <div class="bg-secondary rounded-xl p-5 shadow hover:scale-103 transform transition">
+                            <h4 class="text-white font-bold text-lg">{{ $item->name }}</h4>
+                            <p class="text-gray-400 text-sm">Jakarta Convention Center</p>
 
-                    <!-- Progress -->
-                    <div class="mt-4">
-                        <div class="flex justify-between text-xs text-gray-400 mb-1">
-                            <span>Tickets Sold</span>
-                            <span>75%</span>
+                            <!-- Progress -->
+                            <div class="mt-4">
+                                <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                    <span>Tickets Sold</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="w-full h-2 bg-gray-700 rounded-full">
+                                    <div class="h-2 bg-accent rounded-full w-3/4"></div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 flex justify-between text-sm text-gray-300">
+                                <span>⏰ Ends in 3h</span>
+                                <span>🎟️ 3,750 / 5,000</span>
+                            </div>
                         </div>
-                        <div class="w-full h-2 bg-gray-700 rounded-full">
-                            <div class="h-2 bg-accent rounded-full w-3/4"></div>
-                        </div>
-                    </div>
+                    </a>
+                @endforeach
 
-                    <div class="mt-4 flex justify-between text-sm text-gray-300">
-                        <span>⏰ Ends in 3h</span>
-                        <span>🎟️ 3,750 / 5,000</span>
-                    </div>
-                </div>
-
-                <!-- Event Card -->
-                <div class="bg-secondary rounded-xl p-5 shadow hover:scale-103 transform transition">
-                    <h4 class="text-white font-bold text-lg">Tech Startup Summit</h4>
-                    <p class="text-gray-400 text-sm">Surabaya Grand Hall</p>
-
-                    <!-- Progress -->
-                    <div class="mt-4">
-                        <div class="flex justify-between text-xs text-gray-400 mb-1">
-                            <span>Tickets Sold</span>
-                            <span>60%</span>
-                        </div>
-                        <div class="w-full h-2 bg-gray-700 rounded-full">
-                            <div class="h-2 bg-pink-500 rounded-full w-3/5"></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 flex justify-between text-sm text-gray-300">
-                        <span>⏰ Ends in 5h</span>
-                        <span>🎟️ 1,200 / 2,000</span>
-                    </div>
-                </div>
-
-                <!-- Event Card -->
-                <div class="bg-secondary rounded-xl p-5 shadow hover:scale-103 transform transition">
-                    <h4 class="text-white font-bold text-lg">Food Expo 2025</h4>
-                    <p class="text-gray-400 text-sm">Bandung Expo Center</p>
-
-                    <!-- Progress -->
-                    <div class="mt-4">
-                        <div class="flex justify-between text-xs text-gray-400 mb-1">
-                            <span>Tickets Sold</span>
-                            <span>40%</span>
-                        </div>
-                        <div class="w-full h-2 bg-gray-700 rounded-full">
-                            <div class="h-2 bg-yellow-400 rounded-full w-2/5"></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 flex justify-between text-sm text-gray-300">
-                        <span>⏰ Ends in 7h</span>
-                        <span>🎟️ 800 / 2,000</span>
-                    </div>
-                </div>
             </div>
         </div>
 

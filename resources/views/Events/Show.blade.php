@@ -7,11 +7,9 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     @if (session('loading'))
-        <div class="flex items-center gap-3 p-4 mb-4 text-blue-800 bg-blue-100 rounded-lg border border-blue-200"
-            role="alert">
+        <div class="flex items-center gap-3 p-4 mb-4 text-blue-800 bg-blue-100 rounded-lg border border-blue-200" role="alert">
             <!-- Spinner -->
-            <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24">
+            <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
                 </circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
@@ -20,9 +18,16 @@
             <!-- Message -->
             <span>{{ session('loading') }}</span>
         </div>
+
+        <script>
+            setTimeout(() => {
+                location.reload();
+            }, 3000); // refresh every 3 seconds
+        </script>
     @endif
 
-    
+
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <div class="rounded-xl shadow-lg p-6 text-center bg-primary">
             <h2 class="text-lg font-semibold text-gray-400">Total Tokens</h2>
@@ -59,10 +64,12 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $item->count }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $item->created_at }}</td>
                     <td class="px-6 py-4 text-sm font-medium space-x-4">
-                        <a href="{{ route('tokens.show', ['event_id' => $event->id, 'batch_id' => $item->id]) }}" class="text-blue-400 hover:text-blue-300">View</a>
-                        <a href="{{ route('tokens.download', ['event_id' => $event->id, 'batch_id' => $item->id]) }}" class="text-green-400 hover:text-blue-300">Download</a>
+                        <a href="{{ route('tokens.show', ['event_id' => $event->id, 'batch_id' => $item->id]) }}"
+                            class="text-blue-400 hover:text-blue-300">View</a>
+                        <a href="{{ route('tokens.download', ['event_id' => $event->id, 'batch_id' => $item->id]) }}"
+                            class="text-green-400 hover:text-blue-300">Download</a>
 
-                    </td>   
+                    </td>
                 </tr>
             @empty
                 <tr>
@@ -159,15 +166,15 @@
             <div class="mb-4">
                 <label for="count" class="block text-sm font-medium text-gray-300">Number of Tokens</label>
                 <input type="number" name="count" id="count"
-                    class="w-full mt-1 p-2 rounded bg-primary text-white border border-gray-600" value="25000"
-                    min="1" required>
+                    class="w-full mt-1 p-2 rounded bg-primary text-white border border-gray-600" value="25000" min="1"
+                    required>
             </div>
 
             <div class="mb-4">
                 <label for="length" class="block text-sm font-medium text-gray-300">Token Length</label>
                 <input type="number" name="length" id="length"
-                    class="w-full mt-1 p-2 rounded bg-primary text-white border border-gray-600" value="8"
-                    min="4" max="32" required>
+                    class="w-full mt-1 p-2 rounded bg-primary text-white border border-gray-600" value="8" min="4" max="32"
+                    required>
             </div>
 
             <button type="submit"

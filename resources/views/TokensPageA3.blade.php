@@ -28,12 +28,12 @@
             vertical-align: bottom;
             border: 1px solid #ccc; /* optional */
             padding-bottom: 13px;
-            background: url("{{ public_path('ticket-background.jpg') }}") no-repeat center center;
+            background: url("{{ public_path('ticket-background.png') }}") no-repeat center center;
             background-size: cover;
         }
 
         .qr-code {
-            max-width: 80px;
+            max-width: 90px;
             height: auto;
             padding-bottom: 25px;
         }

@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\Admin\EventsController;
 use App\Http\Controllers\Admin\TokenController;
+use App\Http\Controllers\Auth\OAuth\GoogleController;
+use App\Http\Controllers\Auth\OAuth\RegisterController;
+use App\Http\Controllers\Tokens\ClaimTokenController;
 use App\Http\Controllers\Tokens\GenerateTokenController;
+use App\Models\EventModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,7 +18,10 @@ Route::get('/login', function () {
 });
 
 Route::get('/dashboard/overview', function () {
-    return view('Dashboard.Overview');
+    $event = EventModel::take(5)->get();
+    $totalEvent = EventModel::count();
+    
+    return view('Dashboard.Overview', compact('event', 'totalEvent'));
 });
 
 
@@ -31,19 +38,28 @@ Route::get('/events/show/{id}', [EventsController::class, 'show'])->name('events
  *   Tokens
  *************/
 Route::post('/token/generate/{event_id}', [GenerateTokenController::class, 'generateTokens'])->name('generate.token');
+Route::get('/redeem/{token}', [ClaimTokenController::class, 'view'])->name('tokens.redeem');
 
-Route::get('test', fn () => phpinfo());
+
+/************
+ *   OAuth
+*************/
+Route::get('/auth/google/', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');    
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+
+Route::get('/auth/google/register', [RegisterController::class, 'showRegistrasionView'])->name('google.register');
+Route::post('/auth/google/register', [RegisterController::class, 'storeUserFromGoogle'])->name('google.register.store');
+
 
 /************
  *   Participants
  *************/
 
 
-
 /************
  *
  * Tokens
- *   
+ *
  *************/
 Route::get('/events/{event_id}/token/{batch_id}', [TokenController::class, 'show'])->name('tokens.show');
 Route::get('/tokens/{event_id}/{batch_id}/download', [TokenController::class, 'download'])->name('tokens.download');
