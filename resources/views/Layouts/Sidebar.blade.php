@@ -63,7 +63,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href=""
+                    <a href="{{ route('user.index') }}"
                         class="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-primary @if (request()->routeIs('users.*')) bg-teal-600/20 ring-1 ring-teal-500/20 @endif">
                         <span class="flex items-center justify-center h-8 w-8 rounded-md">
                             <x-lucide-users class="h-5 w-5" />

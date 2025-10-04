@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\EventsController;
 use App\Http\Controllers\Admin\TokenController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\OAuth\GoogleController;
 use App\Http\Controllers\Auth\OAuth\RegisterController;
 use App\Http\Controllers\Tokens\ClaimTokenController;
@@ -52,8 +53,14 @@ Route::post('/auth/google/register', [RegisterController::class, 'storeUserFromG
 
 
 /************
- *   Participants
+ *   Participants / Users
  *************/
+Route::get('/users/all', [UsersController::class, 'index'])->name('user.index');
+Route::get('/user/{id}/show', [UsersController::class, 'show'])->name('user.show');
+Route::get('/user/{id}/edit', [UsersController::class, 'edit'])->name('user.edit');
+Route::get('/user/{id}/update', [UsersController::class, 'update'])->name('user.update');
+Route::get('/user/{id}/delete', [UsersController::class, 'delete'])->name('user.delete');
+
 
 
 /************

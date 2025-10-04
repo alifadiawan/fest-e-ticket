@@ -12,10 +12,9 @@ class TokenController extends Controller
 {
     public function show($tokenID, $batch_id)
     {
-        $tokendetail = TokenModel::with(['event', 'user'])
+        $tokendetail = TokenModel::with(['event', 'user:id,name'])
             ->where('batch_id', '=', $batch_id)
             ->paginate(20);
-
 
         return view('Tokens.Show', compact('tokendetail'));
     }
