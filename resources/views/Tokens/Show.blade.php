@@ -7,7 +7,7 @@
         <table class="table-auto w-full border-collapse border border-zinc-700 text-sm">
             <thead class="bg-primary">
                 <tr>
-                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">#</th>
                     <th class="px-4 py-2">Token</th>
                     <th class="px-4 py-2">Status</th>
                     <th class="px-4 py-2">Used By</th>
