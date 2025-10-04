@@ -23,10 +23,8 @@ class RegisterController extends Controller
     }
     public function storeUserFromGoogle(Request $request)
     {
-        
-
         $data = $request->validate([
-            'campus' => 'required|string|max:255',
+            'asal_kampus' => 'required|string|max:255',
             'no_telp' => 'required|max:255',
         ]);
         $tokenId = $request->input('token_id');
@@ -41,7 +39,7 @@ class RegisterController extends Controller
             'name' => $googleData['name'],
             'email' => $googleData['email'],
             'google_id' => $googleData['google_id'],
-            'asal_kampus' => $request->campus,
+            'asal_kampus' => $request->asal_kampus,
             'no_telp' => $request->no_telp,
             'password' => encrypt(str()->random(16)),
         ]);

@@ -44,7 +44,7 @@
                         <span class="text-sm">Event</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href=""
                         class="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-primary @if (request()->routeIs('users.*')) bg-teal-600/20 ring-1 ring-teal-500/20 @endif">
                         <span class="flex items-center justify-center h-8 w-8 rounded-md">
@@ -52,8 +52,8 @@
                         </span>
                         <span class="text-sm">Participants</span>
                     </a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                     <a href=""
                         class="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-primary @if (request()->routeIs('users.*')) bg-teal-600/20 ring-1 ring-teal-500/20 @endif">
                         <span class="flex items-center justify-center h-8 w-8 rounded-md">
@@ -61,7 +61,7 @@
                         </span>
                         <span class="text-sm">Tokens</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="{{ route('user.index') }}"
                         class="flex items-center gap-3 py-2 px-3 rounded-md hover:bg-primary @if (request()->routeIs('users.*')) bg-teal-600/20 ring-1 ring-teal-500/20 @endif">

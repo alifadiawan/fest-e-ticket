@@ -63,7 +63,7 @@
                     <label class="text-start block text-sm font-medium text-gray-700 mb-2">
                         Campus <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" name="campus" value="{{ old('campus') }}"
+                    <input type="text" name="asal_kampus" value="{{ old('asal_kampus') }}"
                         class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
                         required placeholder="Enter your campus name">
                     @error('campus')
@@ -80,11 +80,11 @@
 
                 <div class="mb-6">
                     <label class="text-start block text-sm font-medium text-gray-700 mb-2">
-                        City <span class="text-red-500">*</span>
+                        No Telp <span class="text-red-500">*</span>
                     </label>
                     <input type="text" name="no_telp" value="{{ old('no_telp') }}"
                         class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
-                        required placeholder="Enter your city">
+                        required placeholder="Enter your phone number">
                     @error('no_telp')
                         <p class="text-red-500 text-xs mt-2 flex items-start">
                             <svg class="w-4 h-4 mr-1 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">

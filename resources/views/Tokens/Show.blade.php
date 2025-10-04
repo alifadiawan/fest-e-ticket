@@ -24,15 +24,16 @@
                         <td class="px-4 py-2">
                             <span
                                 class="px-2 py-1 rounded 
-                                {{ $item->status === 'unused' ? 'bg-yellow-200 text-yellow-800' : 'bg-green-200 text-green-800' }}">
+                                        {{ $item->status === 'unused' ? 'bg-yellow-200 text-yellow-800' : 'bg-green-200 text-green-800' }}">
                                 {{ ucfirst($item->status) }}
                             </span>
                         </td>
-                        <td class="px-4 py-2">{{ $item->user_id ?? '-' }}</td>
                         <td class="px-4 py-2">
-                            <a href="" class="hover:underline">{{ $item->user->name ?? '-' }}</a>
+                            <a href="{{ route('user.show', $item->user->id ?? '-') }}"
+                                class="hover:underline">{{ $item->user->name ?? '-' }}</a>
                         </td>
-                        <td class="px-4 py-2">{{ $item->created_at->format('Y-m-d H:i') }}</td>
+                        <td class="px-4 py-2">{{ $item->used_at ?? '-' }}</td>
+                        <td class="px-4 py-2">{{ $item->created_at->format('d-m-Y H:i') }}</td>
                     </tr>
                 @endforeach
             </tbody>
