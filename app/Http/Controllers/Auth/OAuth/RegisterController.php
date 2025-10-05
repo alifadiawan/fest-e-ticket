@@ -44,7 +44,7 @@ class RegisterController extends Controller
             'password' => encrypt(str()->random(16)),
         ]);
 
-        // Update token (anggap token_id dikirim lewat hidden input)
+        // Update token
         $token = TokenModel::where('token', '=', $tokenId)->first();
         $token->update([
             'user_id' => $user->id,
@@ -62,7 +62,6 @@ class RegisterController extends Controller
         Auth::login($user);
         session()->forget('google_data');
 
-        return true;
-        // return redirect()->route('')->with('success', 'E-Ticket claimed successfully!');
+        return redirect()->route('tokens.success')->with('success', 'E-Ticket claimed successfully!');
     }
 }

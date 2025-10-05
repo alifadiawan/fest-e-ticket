@@ -45,4 +45,8 @@ class ClaimTokenController extends Controller
 
         return view('Registration.Index', compact('token'));
     }
+    
+    public function successView(){
+        return view('Registration.Result');
+    }
 }

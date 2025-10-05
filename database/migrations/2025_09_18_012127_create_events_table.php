@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('location')->nullable();
-            $table->string('slug')->unique();
+            $table->string(column: 'slug')->unique();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->string('custom-ticket-pict')->nullable();

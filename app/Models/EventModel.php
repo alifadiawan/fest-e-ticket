@@ -13,12 +13,22 @@ class EventModel extends Model
 
     protected $guarded = [];
 
-    const DRAFT     = 'draft';
+    const DRAFT = 'draft';
     const PUBLISHED = 'published';
-    const ARCHIVED  = 'archived';
-    const UPCOMING  = 'upcoming';
-    const PASSED  = 'passed';
+    const ARCHIVED = 'archived';
+    const UPCOMING = 'upcoming';
+    const PASSED = 'passed';
 
+    public static function statuses(): array
+    {
+        return [
+            self::DRAFT => 'Draft',
+            self::PUBLISHED => 'Published',
+            self::ARCHIVED => 'Archived',
+            self::UPCOMING => 'Upcoming',
+            self::PASSED => 'Passed',
+        ];
+    }
 
     protected static function boot()
     {

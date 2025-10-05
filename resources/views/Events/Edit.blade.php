@@ -1,7 +1,8 @@
 @extends('Layouts.Main')
+@section('page-title', $event->name)
 @section('content')
 
-    <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('events.update', $event->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -14,49 +15,51 @@
                         <label for="name" class="block text-sm font-medium text-zinc-300 mb-1">Event Name</label>
                         <input type="text" name="name" id="name"
                             class="w-full px-3 py-2 rounded-lg bg-[#121212] border border-zinc-700 focus:ring-2 focus:ring-accent focus:border-accent focus:outline-none text-white placeholder-zinc-500"
-                            placeholder="Enter event name" required>
-                    </div
-                    >
+                            placeholder="Enter event name" value="{{ $event->name }}" required>
+                    </div>
                     <div>
                         <label for="location" class="block text-sm font-medium text-zinc-300 mb-1">Location</label>
                         <input type="text" name="location" id="location"
                             class="w-full px-3 py-2 rounded-lg bg-[#121212] border border-zinc-700 focus:ring-2 focus:ring-accent focus:border-accent focus:outline-none text-white placeholder-zinc-500"
-                            placeholder="Enter location" required>
+                            placeholder="Enter location" value="{{ $event->location }}" required>
                     </div>
 
                     <label for="location" class="block text-sm font-medium text-zinc-300 mb-3">Status</label>
-                   <div class="flex gap-2 flex-wrap ">
-                        @foreach (\App\Models\EventModel::statuses() as $value => $label)
-                            <label class="cursor-pointer">
-                                <input type="radio" name="status" value="{{ $value }}"
-                                    class="hidden peer"
-                                    {{ (old('status', $event->status ?? \App\Models\EventModel::DRAFT)) === $value ? 'checked' : '' }}>
-                                <span
-                                    class="px-4 py-2 rounded-full border border-zinc-700 text-sm
-                                    peer-checked:bg-accent peer-checked:text-white
-                                    bg-[#121212] text-zinc-300 hover:border-accent transition">
-                                    {{ $label }}
-                                </span>
-                            </label>
-                        @endforeach
-                    </div>
+                    <div class="flex gap-2 flex-wrap ">
+                            @foreach (\App\Models\EventModel::statuses() as $value => $label)
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="status" value="{{ $value }}"
+                                        class="hidden peer"
+                                        {{ (old('status', $event->status ?? \App\Models\EventModel::DRAFT)) === $value ? 'checked' : '' }}>
+                                    <span
+                                        class="px-4 py-2 rounded-full border border-zinc-700 text-sm
+                                        peer-checked:bg-accent peer-checked:text-white
+                                        bg-[#121212] text-zinc-300 hover:border-accent transition">
+                                        {{ $label }}
+                                    </span>
+                                </label>
+                            @endforeach
+                        </div>
 
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label for="start_date" class="block text-sm font-medium text-zinc-300 mb-1">Start Date</label>
                             <input type="date" name="start_date" id="start_date"
+                                value="{{ $event->start_date ? \Carbon\Carbon::parse($event->start_date)->format('Y-m-d') : '' }}"
                                 class="w-full px-3 py-2 rounded-lg bg-[#121212] border border-zinc-700 focus:ring-2 focus:ring-accent focus:border-accent focus:outline-none text-white">
+
                         </div>
 
                         <div>
                             <label for="end_date" class="block text-sm font-medium text-zinc-300 mb-1">End Date</label>
                             <input type="date" name="end_date" id="end_date"
+                                value="{{ $event->end_date ? \Carbon\Carbon::parse($event->end_date)->format('Y-m-d') : '' }}"
                                 class="w-full px-3 py-2 rounded-lg bg-[#121212] border border-zinc-700 focus:ring-2 focus:ring-accent focus:border-accent focus:outline-none text-white">
                         </div>
                     </div>
 
-                   
+
                 </div>
             </div>
 
@@ -71,8 +74,14 @@
 
                 <!-- Preview -->
                 <div class="mt-4">
-                    <img id="ticketPreview" class="hidden w-full rounded-lg border border-zinc-700" alt="Preview">
+                    @if($event->{'custom-ticket-pict'})
+                        <img id="ticketPreview" src="{{ asset('storage/' . $event->{'custom-ticket-pict'}) }}"
+                            class="w-full rounded-lg border border-zinc-700" alt="Current Ticket">
+                    @else
+                        <img id="ticketPreview" class="hidden w-full rounded-lg border border-zinc-700" alt="Preview">
+                    @endif
                 </div>
+
             </div>
         </div>
 

@@ -35,7 +35,7 @@
                 </div>
                 <div>
                     <h3 class="text-gray-400 text-sm">Tickets Sold</h3>
-                    <p class="text-white font-bold text-2xl mt-2">5,200</p>
+                    <p class="text-white font-bold text-2xl mt-2">{{ $totalTokens }}</p>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <h3 class="text-gray-400 text-sm">Revenue</h3>
-                    <p class="text-white font-bold text-2xl mt-2">$12,450</p>
+                    <p class="text-white font-bold text-2xl mt-2">-</p>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
                 </div>
                 <div>
                     <h3 class="text-gray-400 text-sm">Active Users</h3>
-                    <p class="text-white font-bold text-2xl mt-2">1,320</p>
+                    <p class="text-white font-bold text-2xl mt-2">{{ $totalUsers }}</p>
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
 
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ($event as $item)
+                @foreach ($events as $item)
                     <!-- Event Card -->
                     <a href="{{ route('events.show', $item->id) }}">
                         <div class="bg-secondary rounded-xl p-5 shadow hover:scale-103 transform transition">
@@ -85,19 +85,23 @@
                             <p class="text-gray-400 text-sm">Jakarta Convention Center</p>
 
                             <!-- Progress -->
+                            @php
+                                $progress = $item->total_tokens > 0
+                                    ? ($item->claimed_tokens / $item->total_tokens) * 100
+                                    : 0;
+                            @endphp
                             <div class="mt-4">
                                 <div class="flex justify-between text-xs text-gray-400 mb-1">
                                     <span>Tickets Sold</span>
-                                    <span>75%</span>
+                                    <span>{{ $progress }} %</span>
                                 </div>
                                 <div class="w-full h-2 bg-gray-700 rounded-full">
-                                    <div class="h-2 bg-accent rounded-full w-3/4"></div>
+                                    <div class="h-2 bg-accent rounded-full" style="width: {{ $progress }}%"></div>
                                 </div>
                             </div>
 
                             <div class="mt-4 flex justify-between text-sm text-gray-300">
-                                <span>⏰ Ends in 3h</span>
-                                <span>🎟️ 3,750 / 5,000</span>
+                                <span>🎟️ {{ $item->claimed_tokens }} / {{ $item->total_tokens }}</span>
                             </div>
                         </div>
                     </a>
