@@ -28,7 +28,7 @@
             vertical-align: bottom;
             border: 1px solid #ccc; /* optional */
             padding-bottom: 13px;
-            background: url("{{ public_path('ticket-background.png') }}") no-repeat center center;
+            background: url('{{ public_path('storage/' . $custom_image) }}') no-repeat center center;
             background-size: cover;
         }
 

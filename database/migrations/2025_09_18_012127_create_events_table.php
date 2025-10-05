@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('location')->nullable();
             $table->string('slug')->unique();
-            $table->string('start_date')->nullable();
-            $table->string('end_date')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->string('custom-ticket-pict')->nullable();
             $table->text('description')->nullable();
             $table->string('status')->default('draft');
 

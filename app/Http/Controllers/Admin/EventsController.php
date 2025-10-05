@@ -27,12 +27,18 @@ class EventsController extends Controller
     {
 
         $data = $request->validate([
-            'name'          => 'required|string|max:255',
-            'start_date'    => 'nullable|string',
-            'end_date'      => 'nullable|string',
-            'created_by'    => 'nullable',
-            'status'        =>  EventModel::DRAFT,
+            'name' => 'required|string|max:255',
+            'start_date' => 'nullable|string',
+            'end_date' => 'nullable|string',
+            'created_by' => 'nullable',
+            'custom-ticket-pict' => 'nullable',
+            'status' => EventModel::DRAFT,
         ]);
+
+        if ($request->hasFile('custom-ticket-pict')) {
+            $path = $request->file('custom-ticket-pict')->store('tickets', 'public');
+            $data['custom-ticket-pict'] = $path;
+        }
 
         $event = EventModel::create($data);
 
@@ -50,6 +56,10 @@ class EventsController extends Controller
         return view('Events.Show', compact('event', 'TokenHistory', 'RegisteredUsers', 'TokenClaimed', 'TotalToken'));
     }
 
-    public function update() {}
-    public function delete() {}
+    public function update()
+    {
+    }
+    public function delete()
+    {
+    }
 }

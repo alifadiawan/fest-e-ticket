@@ -26,9 +26,7 @@
         </script>
     @endif
 
-
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         <div class="rounded-xl shadow-lg p-6 text-center bg-primary">
             <h2 class="text-lg font-semibold text-gray-400">Total Tokens</h2>
             <p class="text-4xl font-extrabold text-indigo-400 mt-2">{{ $TotalToken }}</p>
@@ -42,6 +40,15 @@
             <p class="text-4xl font-extrabold text-yellow-400 mt-2">{{ $TokenClaimed }}</p>
         </div>
     </div>
+
+    <div class="flex flex-col mb-12 items-start">
+        <h2 class="text-2xl font-bold text-white mb-4">Ticket Design</h2>
+        <div class="w-[778px] h-[224px] overflow-hidden flex items-center justify-center">
+            <img src="{{ asset('storage/' . $event->{'custom-ticket-pict'}) }}"
+                class="h-[778px] w-[224px] -rotate-90 object-contain" alt="E-Ticket">
+        </div>
+    </div>
+
 
     <div class="flex flex-row justify-between mb-4">
         <h2 class="text-2xl font-bold text-white">Tokens History</h2>
@@ -83,7 +90,7 @@
 
 
     <h2 class="text-2xl font-bold text-white mb-4 mt-4">Analytics</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         <div class="rounded-xl p-6 bg-primary">
             <h3 class="text-lg font-semibold text-gray-300 mb-4">User Registrations (Last 7 Days)</h3>
             <div class="w-full h-64 flex items-end justify-between space-x-2">

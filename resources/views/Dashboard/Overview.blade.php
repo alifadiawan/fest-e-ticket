@@ -8,7 +8,7 @@
         {{-- cards overview --}}
         <div class="flex flex-row gap-5 flex-wrap mt-5">
             <!-- Total Events Card -->
-            <div class="bg-primary rounded-2xl shadow-lg p-6 w-64 transform transition flex ">
+            <div class="bg-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Calendar Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24"
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Tickets Sold Card -->
-            <div class="bg-primary rounded-2xl shadow-lg p-6 w-64 transform transition flex ">
+            <div class="bg-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Ticket Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" fill="none" viewBox="0 0 24 24"
@@ -40,7 +40,7 @@
             </div>
 
             <!-- Revenue Card -->
-            <div class="bg-primary rounded-2xl shadow-lg p-6 w-64 transform transition flex ">
+            <div class="bg-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Dollar Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24"
@@ -56,7 +56,7 @@
             </div>
 
             <!-- Active Users Card -->
-            <div class="bg-primary rounded-2xl shadow-lg p-6 w-64 transform transition flex ">
+            <div class="bg-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Users Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none" viewBox="0 0 24 24"
