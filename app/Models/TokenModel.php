@@ -16,7 +16,13 @@ class TokenModel extends Model
         return $this->belongsTo(EventModel::class, 'event_id', 'id');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
+    }
+
+    public function registrations()
+    {
+        return $this->hasMany(RegistrationModel::class, 'token_id', 'id');
     }
 }

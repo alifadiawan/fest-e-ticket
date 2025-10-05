@@ -31,7 +31,6 @@
             <div class="mt-6 border rounded-xl p-4 bg-gray-50 text-left">
                 <p><span class="font-semibold">Event:</span>-------</p>
                 <p><span class="font-semibold">Tanggal:</span>
-                    <!-- {{ \Carbon\Carbon::parse($usertoken->event->start_date)->format('d M Y') }}</p> -->
             </div>
         </div>
     </div>

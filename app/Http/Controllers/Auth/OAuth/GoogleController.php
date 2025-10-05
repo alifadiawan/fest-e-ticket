@@ -53,8 +53,7 @@ class GoogleController extends Controller
                     'token_id' => $token->id,
                 ]);
 
-                return true;
-                // return redirect()->route('dashboard')->with('success', 'Login berhasil');
+                return redirect()->route('tokens.success')->with('success', 'Login berhasil');
             }
 
             // Store Google data di session untuk registrasi baru

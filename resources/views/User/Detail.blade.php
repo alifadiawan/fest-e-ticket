@@ -33,16 +33,45 @@
         <div class="warning">
             <p class="text-sm text-zinc-500">
                 <span class="text-red-500 text-xs">*</span>
-                Mengirim pesan manual dengan Whatsapp dapat berujung pemblokiran nomor pengirim dari Facebook. Gunakan dengan bijak !
+                Mengirim pesan manual dengan Whatsapp dapat berujung pemblokiran nomor pengirim dari Facebook. Gunakan
+                dengan bijak !
                 <br>
-                <a href="https://faq.whatsapp.com/465883178708358/?helpref=hc_fnav" target="_blank" class="underline hover:text-zinc-400">baca disini</a>
+                <a href="https://faq.whatsapp.com/465883178708358/?helpref=hc_fnav" target="_blank"
+                    class="underline hover:text-zinc-400">baca disini</a>
             </p>
         </div>
 
     </div>
 
-    <div class="card bg-primary p-6 rounded-xl">
-        <h1 class="font-bold text-2xl">Event Terdaftar</h1>
+    <h1 class="font-bold text-2xl mb-5 ">Event Terdaftar</h1>
+    <div class="rounded-xl shadow-lg overflow-hidden border border-zinc-700">
+        <table class="min-w-full">
+            <thead style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Event
+                        Name
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Token
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Registered
+                        at
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-700">
+                @foreach ($pastEvent as $item)
+                    <tr>
+                        <td class="px-6 py-4 text-sm text-gray-400">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4 text-sm text-white font-medium">{{ $item->event->name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-400">{{ $item->token->token }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-400">
+                            {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d M Y H:i') }}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
 @endsection
