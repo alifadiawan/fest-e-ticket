@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\EventModel;
+use App\Models\RegistrationModel;
 use App\Models\TokenBatchModel;
 use App\Models\TokenModel;
+use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Http\Request;
 use App\Services\TokenServices;
 
@@ -50,7 +52,7 @@ class EventsController extends Controller
         $TokenHistory = TokenBatchModel::where('event_id', '=', $id)->latest()->get();
 
         $TotalToken = TokenModel::where('event_id', '=', $id)->count();
-        $RegisteredUsers = 10;
+        $RegisteredUsers = RegistrationModel::where('event_id','=', $id)->count();
         $TokenClaimed = TokenModel::where('status', '=', 'used')->count();
 
         return view('Events.Show', compact('event', 'TokenHistory', 'RegisteredUsers', 'TokenClaimed', 'TotalToken'));
