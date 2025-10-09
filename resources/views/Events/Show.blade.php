@@ -44,7 +44,7 @@
     <div class="flex flex-col mb-12 items-start">
         <h2 class="text-2xl font-bold text-white mb-4">Ticket Design</h2>
         <div class="w-[778px] h-[224px] overflow-hidden flex items-center justify-center">
-            <img src="{{ asset('storage/' . $event->{'custom-ticket-pict'}) }}"
+            <img src="{{ asset('storage/' . $event->{'custom_ticket_pict'}) }}"
                 class="h-[778px] w-[224px] -rotate-90 object-contain rounded-xl" alt="E-Ticket">
         </div>
     </div>

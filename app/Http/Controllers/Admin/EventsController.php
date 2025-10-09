@@ -33,13 +33,13 @@ class EventsController extends Controller
             'start_date' => 'nullable|string',
             'end_date' => 'nullable|string',
             'created_by' => 'nullable',
-            'custom-ticket-pict' => 'nullable',
+            'custom_ticket_pict' => 'nullable',
             'status' => 'nullable',
         ]);
 
-        if ($request->hasFile('custom-ticket-pict')) {
-            $path = $request->file('custom-ticket-pict')->store('tickets', 'public');
-            $data['custom-ticket-pict'] = $path;
+        if ($request->hasFile('custom_ticket_pict')) {
+            $path = $request->file('custom_ticket_pict')->store('tickets', 'public');
+            $data['custom_ticket_pict'] = $path;
         }
 
         $event = EventModel::create($data);
@@ -72,17 +72,17 @@ class EventsController extends Controller
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'created_by' => 'nullable',
-            'custom-ticket-pict' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'custom_ticket_pict' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'nullable|string',
         ]);
 
         // Handle file upload & Hapus file lama kalau ada
-        if ($request->hasFile('custom-ticket-pict')) {
+        if ($request->hasFile('custom_ticket_pict')) {
             if ($event->custom_ticket_pict && \Storage::disk('public')->exists($event->custom_ticket_pict)) {
                 \Storage::disk('public')->delete($event->custom_ticket_pict);
             }
 
-            $path = $request->file('custom-ticket-pict')->store('tickets', 'public');
+            $path = $request->file('custom_ticket_pict')->store('tickets', 'public');
             $data['custom_ticket_pict'] = $path;
         }
 

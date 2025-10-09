@@ -27,13 +27,16 @@
             <div class="bg-red-200 border-red-500 text-red-500 p-2 rounded mb-5">
                 {{ $error }}
             </div>
-        @else
-
+        @endif
+        @if (session('error'))
+            <div class="bg-red-200 border-red-500 text-red-500 p-2 rounded mb-5">
+                {{ session('error') }}
+            </div>
         @endif
 
 
         @if(isset($error))
-            
+
         @else
             <a href="{{ route('google.redirect', ['token' => $token])}}"
                 class="flex justify-center items-center gap-2 w-full bg-white border border-gray-300 rounded-lg px-6 py-3 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">

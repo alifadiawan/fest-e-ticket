@@ -7,7 +7,7 @@ use App\Models\TokenModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class TokenServices
+class GenerateTokenService
 {
     // core function
     function generateUniqueToken(string $eventSlug, int $length = 8): string

@@ -82,7 +82,7 @@
                     <a href="{{ route('events.show', $item->id) }}">
                         <div class="bg-secondary rounded-xl p-5 shadow hover:scale-103 transform transition">
                             <h4 class="text-white font-bold text-lg">{{ $item->name }}</h4>
-                            <p class="text-gray-400 text-sm">Jakarta Convention Center</p>
+                            <p class="text-gray-400 text-sm">{{ $item->location }}</p>
 
                             <!-- Progress -->
                             @php

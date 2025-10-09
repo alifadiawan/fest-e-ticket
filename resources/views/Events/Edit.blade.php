@@ -69,13 +69,13 @@
                 <span class="text-red-500 text-xs mb-1">*</span>
                 <span class="text-sm text-zinc-500 mb-4 block">Minimum size: 224x778 px</span>
 
-                <input type="file" id="ticketInput" name="custom-ticket-pict" accept="image/*"
+                <input type="file" id="ticketInput" name="custom_ticket_pict" accept="image/*"
                     class="w-full px-3 py-2 rounded-lg bg-[#121212] border border-zinc-700 focus:ring-2 focus:ring-accent focus:border-accent focus:outline-none text-white cursor-pointer">
 
                 <!-- Preview -->
                 <div class="mt-4">
-                    @if($event->{'custom-ticket-pict'})
-                        <img id="ticketPreview" src="{{ asset('storage/' . $event->{'custom-ticket-pict'}) }}"
+                    @if($event->{'custom_ticket_pict'})
+                        <img id="ticketPreview" src="{{ asset('storage/' . $event->{'custom_ticket_pict'}) }}"
                             class="w-full rounded-lg border border-zinc-700" alt="Current Ticket">
                     @else
                         <img id="ticketPreview" class="hidden w-full rounded-lg border border-zinc-700" alt="Preview">

@@ -32,7 +32,7 @@ class TokenController extends Controller
         $pdf = Pdf::loadView('TokensPageA3', [
             'event' => $event,
             'tokens' => $tokens,
-            'custom_image' => $event->{'custom-ticket-pict'}
+            'custom_image' => $event->{'custom_ticket_pict'}
         ])->setPaper('a3', 'potrait'); // A3 size, landscape
 
         // File name

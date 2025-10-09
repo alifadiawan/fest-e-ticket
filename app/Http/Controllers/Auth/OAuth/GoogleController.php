@@ -26,37 +26,58 @@ class GoogleController extends Controller
     public function handleGoogleCallback(Request $request)
     {
         try {
-            // Ambil token dari session
             $registrationToken = session('registration_token_custom');
             if (!$registrationToken) {
-                return redirect()->back()->with('error', 'Token tidak ditemukan');
+                return back()->with('error', 'Token tidak ditemukan');
             }
 
-            $googleUser = Socialite::driver('google')->user();
+            // Use stateless() for lighter auth (no session sync)
+            $googleUser = Socialite::driver('google')->stateless()->user();
 
-            // Cek apakah user sudah terdaftar
-            $findUser = User::where('google_id', $googleUser->getId())->first();
+            $findUser = User::where('google_id', '=', $googleUser->getId())->first();
+            $token = TokenModel::where('token', '=', $registrationToken)->first();
 
+            if (!$token) {
+                return back()->with('error', 'Token tidak valid.');
+            }
+
+            // ===============================
+            // User Sudah ada
+            // ===============================
             if ($findUser) {
-                // Update token
-                $token = TokenModel::where('token', $registrationToken)->firstOrFail();
-                $token->update([
-                    'user_id' => $findUser->id,
-                    'status' => 'used',
-                    'used_at' => now(),
-                ]);
+                $alreadyRegistered = RegistrationModel::where('user_id', '=', $findUser->id)
+                    ->where('event_id', '=', $token->event_id)
+                    ->exists();
 
-                // Buat registration
+                if ($alreadyRegistered) {
+                    return redirect()
+                        ->route('tokens.redeem', $registrationToken)
+                        ->with('error', 'You have already registered for this event.')
+                        ->withInput();
+                }
+
+                if ($token->status !== 'used') {
+                    $token->update([
+                        'user_id' => $findUser->id,
+                        'status' => 'used',
+                        'used_at' => now(),
+                    ]);
+                }
+
                 RegistrationModel::create([
                     'user_id' => $findUser->id,
                     'event_id' => $token->event_id,
                     'token_id' => $token->id,
                 ]);
 
-                return redirect()->route('tokens.success')->with('success', 'Login berhasil');
+                return redirect()
+                    ->route('tokens.success')
+                    ->with('success', 'Login berhasil');
             }
 
-            // Store Google data di session untuk registrasi baru
+            // ===============================
+            // User Baru
+            // ===============================
             session([
                 'google_data' => [
                     'name' => $googleUser->getName(),
@@ -69,10 +90,16 @@ class GoogleController extends Controller
             return redirect()->route('google.register');
 
         } catch (\Throwable $e) {
-            Log::error('Google callback error: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat login dengan Google.');
+            Log::error('Google callback error', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'registration_token' => $request->session()->get('registration_token_custom'),
+            ]);
+
+            return back()->with('error', 'Terjadi kesalahan saat login dengan Google.');
         }
     }
+
 
 
 }
