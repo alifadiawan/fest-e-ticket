@@ -46,16 +46,33 @@ class EventsController extends Controller
 
         return redirect()->route('events.index')->with('success', 'Event Created Successfully');
     }
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $event = EventModel::find($id);
         $TokenHistory = TokenBatchModel::where('event_id', '=', $id)->latest()->get();
 
+        // stats
         $TotalToken = TokenModel::where('event_id', '=', $id)->count();
-        $RegisteredUsers = RegistrationModel::where('event_id','=', $id)->count();
-        $TokenClaimed = TokenModel::where('status', '=', 'used')->count();
+        $RegisteredUsersCount = RegistrationModel::where('event_id', '=', $id)->count();
+        $TokenClaimed = TokenModel::where('status', '=', 'used')
+            ->where('event_id', '=', $id)->count();
 
-        return view('Events.Show', compact('event', 'TokenHistory', 'RegisteredUsers', 'TokenClaimed', 'TotalToken'));
+        // search
+        $search = $request->input('search');
+
+        $RegisteredUsers = RegistrationModel::where('event_id', $id)
+            ->with('user:id,name,email')
+            ->when($search, function ($query, $search) {
+                $query->whereHas('user', function ($userQuery) use ($search) {
+                    $userQuery->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->latest()
+            ->paginate(20)
+            ->appends(['search' => $search]);
+
+        return view('Events.Show', compact('event', 'TokenHistory', 'RegisteredUsersCount', 'TokenClaimed', 'TotalToken', 'RegisteredUsers', 'search'));
     }
 
     public function edit($id)

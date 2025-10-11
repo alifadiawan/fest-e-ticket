@@ -14,6 +14,10 @@ class RegistrationModel extends Model
         return $this->belongsTo(EventModel::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function token()
     {
         return $this->belongsTo(TokenModel::class, 'token_id', 'id');

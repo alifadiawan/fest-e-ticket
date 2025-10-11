@@ -33,7 +33,7 @@
         </div>
         <div class="rounded-xl shadow-lg p-6 text-center bg-primary">
             <h2 class="text-lg font-semibold text-gray-400">Registered Users</h2>
-            <p class="text-4xl font-extrabold text-green-400 mt-2">{{ $RegisteredUsers }}</p>
+            <p class="text-4xl font-extrabold text-green-400 mt-2">{{ $RegisteredUsersCount }}</p>
         </div>
         <div class="rounded-xl shadow-lg p-6 text-center bg-primary">
             <h2 class="text-lg font-semibold text-gray-400">Tokens Claimed</h2>
@@ -91,38 +91,38 @@
         </table>
     </div>
     <!-- <table class="min-w-full  mb-4">
-                    <thead style="background-color: rgba(255, 255, 255, 0.05);">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Token Count
-                            </th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Created At</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-zinc-700" style="border-color: var(--color-border);">
-                        @forelse ($TokenHistory as $item)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $item->count }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $item->created_at }}</td>
-                                <td class="px-6 py-4 text-sm font-medium space-x-4">
-                                    <a href="{{ route('tokens.show', ['event_id' => $event->id, 'batch_id' => $item->id]) }}"
-                                        class="text-blue-400 hover:text-blue-300">View</a>
-                                    <a href="{{ route('tokens.download', ['event_id' => $event->id, 'batch_id' => $item->id]) }}"
-                                        class="text-green-400 hover:text-blue-300">Download</a>
+                                                    <thead style="background-color: rgba(255, 255, 255, 0.05);">
+                                                        <tr>
+                                                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
+                                                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Token Count
+                                                            </th>
+                                                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Created At</th>
+                                                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="divide-y divide-zinc-700" style="border-color: var(--color-border);">
+                                                        @forelse ($TokenHistory as $item)
+                                                            <tr>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $loop->iteration }}</td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $item->count }}</td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $item->created_at }}</td>
+                                                                <td class="px-6 py-4 text-sm font-medium space-x-4">
+                                                                    <a href="{{ route('tokens.show', ['event_id' => $event->id, 'batch_id' => $item->id]) }}"
+                                                                        class="text-blue-400 hover:text-blue-300">View</a>
+                                                                    <a href="{{ route('tokens.download', ['event_id' => $event->id, 'batch_id' => $item->id]) }}"
+                                                                        class="text-green-400 hover:text-blue-300">Download</a>
 
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="px-6 py-6 text-center whitespace-nowrap text-sm text-zinc-400">No Token
-                                    Generated Yet </td>
-                            </tr>
-                        @endforelse
+                                                                </td>
+                                                            </tr>
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="4" class="px-6 py-6 text-center whitespace-nowrap text-sm text-zinc-400">No Token
+                                                                    Generated Yet </td>
+                                                            </tr>
+                                                        @endforelse
 
-                    </tbody>
-                </table> -->
+                                                    </tbody>
+                                                </table> -->
 
 
     <h2 class="text-2xl font-bold text-white mb-4 mt-4">Analytics</h2>
@@ -154,10 +154,25 @@
         </div>
     </div>
 
-    <h2 class="text-2xl font-bold text-white mb-4">Recent Registrations</h2>
-    <div class="rounded-xl overflow-hidden" border: 1px solid var(--color-border);">
+    <h2 class="text-2xl font-bold text-white mb-4">All Users Registration</h2>
+
+    <!-- Search Bar -->
+    <form method="GET" action="{{ route('events.show', $event->id) }}" class="mb-4 flex items-center justify-between">
+        <div class="relative w-full max-w-xs">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search users..."
+                class="w-full pl-10 pr-4 py-2 bg-zinc-800 border border-zinc-700 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-primary placeholder-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+            </svg>
+        </div>
+    </form>
+
+    <!-- Tables -->
+    <div class="rounded-xl shadow-lg overflow-hidden border border-zinc-700">
         <table class="min-w-full">
-            <thead style="background-color: rgba(255, 255, 255, 0.05);">
+            <thead class="bg-primary">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Name</th>
@@ -166,40 +181,26 @@
                         At</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-zinc-700" style="border-color: var(--color-border);">
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">1</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Aria Montgomery</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">aria.m@email.com</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">2025-09-18</td>
-                </tr>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">2</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Spencer Hastings</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">spencer.h@email.com</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">2025-09-18</td>
-                </tr>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">3</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Hanna Marin</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">hanna.m@email.com</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">2025-09-17</td>
-                </tr>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">4</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Emily Fields</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">emily.f@email.com</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">2025-09-16</td>
-                </tr>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">5</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Caleb Rivers</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">caleb.r@email.com</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">2025-09-15</td>
-                </tr>
+            <tbody>
+                @foreach ($RegisteredUsers as $item)
+                    <tr class="">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
+                            <a href="{{ route('user.show', $item->user->id ?? '-') }}"
+                                class="hover:underline">{{ $item->user->name ?? '-' }}</a>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $item->user->email }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white flex flex-col">
+                            {{ $item->created_at->format('d-m-Y H:i') }}
+                            <span class="text-xs text-zinc-500">{{ $item->created_at->diffForHumans() }}</span>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
+
+    {{ $RegisteredUsers->links() }}
 
     {{-- generate token --}}
     <x-modal id="exampleModal" title="Event Details">

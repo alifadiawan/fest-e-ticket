@@ -10,13 +10,27 @@ use Illuminate\Http\Request;
 
 class TokenController extends Controller
 {
-    public function show($tokenID, $batch_id)
+    public function show(Request $request, $tokenID, $batch_id)
     {
-        $tokendetail = TokenModel::with(['event', 'user:id,name'])
-            ->where('batch_id', '=', $batch_id)
-            ->paginate(20);
+        $search = $request->input('search');
 
-        return view('Tokens.Show', compact('tokendetail'));
+        $tokendetail = TokenModel::with(['event', 'user:id,name,email'])
+            ->where('batch_id', $batch_id)
+            ->when($search, function ($query, $search) {
+                $query->where(function ($subQuery) use ($search) {
+                    $subQuery->where('token', 'like', "%{$search}%")
+                        ->orWhereHas('user', function ($userQuery) use ($search) {
+                            $userQuery->where('name', 'like', "%{$search}%")
+                                ->orWhere('email', 'like', "%{$search}%");
+                        });
+                });
+            })
+            ->latest()
+            ->paginate(20)
+            ->appends(['search' => $search]);
+
+
+        return view('Tokens.Show', compact('tokendetail', 'search'));
     }
 
     public function download($event_id, $batch_id)
