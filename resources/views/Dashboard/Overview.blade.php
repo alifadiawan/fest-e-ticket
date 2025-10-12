@@ -8,7 +8,7 @@
         {{-- cards overview --}}
         <div class="flex flex-row gap-5 flex-wrap mt-5">
             <!-- Total Events Card -->
-            <div class="bg-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
+            <div class="bg-gradient-to-br from-primary-light to-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Calendar Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24"
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Tickets Sold Card -->
-            <div class="bg-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
+            <div class="bg-gradient-to-br from-primary-light to-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Ticket Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" fill="none" viewBox="0 0 24 24"
@@ -40,7 +40,7 @@
             </div>
 
             <!-- Revenue Card -->
-            <div class="bg-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
+            <div class="bg-gradient-to-br from-primary-light to-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Dollar Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24"
@@ -56,7 +56,7 @@
             </div>
 
             <!-- Active Users Card -->
-            <div class="bg-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
+            <div class="bg-gradient-to-br from-primary-light to-primary rounded-2xl shadow-lg p-6 w-62 transform transition flex ">
                 <div class="mr-4 flex items-center">
                     <!-- Users Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none" viewBox="0 0 24 24"
@@ -80,28 +80,32 @@
                 @foreach ($events as $item)
                     <!-- Event Card -->
                     <a href="{{ route('events.show', $item->id) }}">
-                        <div class="bg-secondary rounded-xl p-5 shadow hover:scale-103 transform transition">
-                            <h4 class="text-white font-bold text-lg">{{ $item->name }}</h4>
-                            <p class="text-gray-400 text-sm">{{ $item->location }}</p>
-
-                            <!-- Progress -->
-                            @php
-                                $progress = $item->total_tokens > 0
-                                    ? ($item->claimed_tokens / $item->total_tokens) * 100
-                                    : 0;
-                            @endphp
-                            <div class="mt-4">
-                                <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                    <span>Tickets Sold</span>
-                                    <span>{{ $progress }} %</span>
-                                </div>
-                                <div class="w-full h-2 bg-gray-700 rounded-full">
-                                    <div class="h-2 bg-accent rounded-full" style="width: {{ $progress }}%"></div>
-                                </div>
+                        <div class="bg-black rounded-xl shadow hover:scale-103 transform transition">
+                            <div class="flex flex-col bg-secondary p-4 rounded-t-xl">
+                                <h4 class="text-white font-bold text-lg">{{ $item->name }}</h4>
+                                <p class="text-gray-400 text-sm">{{ $item->location }}</p>
                             </div>
 
-                            <div class="mt-4 flex justify-between text-sm text-gray-300">
-                                <span>🎟️ {{ $item->claimed_tokens }} / {{ $item->total_tokens }}</span>
+                            <div class="content p-4">
+                                <!-- Progress -->
+                               @php
+                                    $progress = $item->total_tokens > 0
+                                        ? round(($item->claimed_tokens / $item->total_tokens) * 100, 2)
+                                        : 0;
+                                @endphp
+                                <div class="mt-2">
+                                    <div class="flex justify-between text-xs text-gray-400 mb-1">
+                                        <span>Tickets Sold</span>
+                                        <span>{{ $progress }} %</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-gray-700 rounded-full">
+                                        <div class="h-2 bg-accent rounded-full" style="width: {{ $progress }}%"></div>
+                                    </div>
+                                </div>
+    
+                                <div class="mt-4 flex justify-between text-sm text-gray-300">
+                                    <span>🎟️ {{ $item->claimed_tokens }} / {{ $item->total_tokens }}</span>
+                                </div>
                             </div>
                         </div>
                     </a>

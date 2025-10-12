@@ -41,6 +41,7 @@
             max-width: 90px;
             height: auto;
             padding-bottom: 25px;
+            transform: rotate(90deg);
         }
 
         .token {

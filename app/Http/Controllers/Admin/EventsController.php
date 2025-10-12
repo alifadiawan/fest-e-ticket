@@ -33,6 +33,7 @@ class EventsController extends Controller
             'start_date' => 'nullable|string',
             'end_date' => 'nullable|string',
             'created_by' => 'nullable',
+            'location' => 'nullable',
             'custom_ticket_pict' => 'nullable',
             'status' => 'nullable',
         ]);
@@ -89,6 +90,7 @@ class EventsController extends Controller
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'created_by' => 'nullable',
+            'location' => 'nullable',
             'custom_ticket_pict' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'nullable|string',
         ]);

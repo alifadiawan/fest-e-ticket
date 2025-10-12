@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventsController;
 use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Admin\UsersController;
@@ -21,22 +22,8 @@ Route::get('/login', function () {
     return view('Auth.Login');
 });
 
-Route::get('/dashboard/overview', function () {
-    $events = EventModel::select('events.*')
-    ->selectRaw('COUNT(tokens.id) as total_tokens')
-    ->selectRaw('SUM(CASE WHEN tokens.status = "used" THEN 1 ELSE 0 END) as claimed_tokens')
-    ->leftJoin('tokens', 'tokens.event_id', '=', 'events.id')
-    ->groupBy('events.id')
-    ->take(5)
-    ->get();
-
-    $totalEvent = EventModel::count();
-    $totalTokens = TokenModel::where('status', '=', 'used')->count();
-    $totalUsers = User::count();
-
-    return view('Dashboard.Overview', compact('events', 'totalEvent', 'totalTokens', 'totalUsers'));
-});
-
+Route::get('/dashboard/overview', [DashboardController::class, 'overview'])->name('dashboard.overview');
+Route::get('/dashboard/analytics', [DashboardController::class, 'analytics'])->name('dashboard.analytics');
 
 /************
  *   Events

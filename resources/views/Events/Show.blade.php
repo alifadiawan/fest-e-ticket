@@ -90,41 +90,7 @@
             </tbody>
         </table>
     </div>
-    <!-- <table class="min-w-full  mb-4">
-                                                    <thead style="background-color: rgba(255, 255, 255, 0.05);">
-                                                        <tr>
-                                                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
-                                                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Token Count
-                                                            </th>
-                                                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Created At</th>
-                                                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="divide-y divide-zinc-700" style="border-color: var(--color-border);">
-                                                        @forelse ($TokenHistory as $item)
-                                                            <tr>
-                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $loop->iteration }}</td>
-                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $item->count }}</td>
-                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $item->created_at }}</td>
-                                                                <td class="px-6 py-4 text-sm font-medium space-x-4">
-                                                                    <a href="{{ route('tokens.show', ['event_id' => $event->id, 'batch_id' => $item->id]) }}"
-                                                                        class="text-blue-400 hover:text-blue-300">View</a>
-                                                                    <a href="{{ route('tokens.download', ['event_id' => $event->id, 'batch_id' => $item->id]) }}"
-                                                                        class="text-green-400 hover:text-blue-300">Download</a>
-
-                                                                </td>
-                                                            </tr>
-                                                        @empty
-                                                            <tr>
-                                                                <td colspan="4" class="px-6 py-6 text-center whitespace-nowrap text-sm text-zinc-400">No Token
-                                                                    Generated Yet </td>
-                                                            </tr>
-                                                        @endforelse
-
-                                                    </tbody>
-                                                </table> -->
-
-
+    
     <h2 class="text-2xl font-bold text-white mb-4 mt-4">Analytics</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         <div class="rounded-xl p-6 bg-primary">

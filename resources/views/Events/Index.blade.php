@@ -31,15 +31,16 @@
 
     <h2 class="text-2xl font-bold text-white mb-4">All Events</h2>
 
-    <a href="{{ route('events.create') }}" class="px-4 py-2 bg-primary rounded-lg mb-5">Create Event</a>
+    <a href="{{ route('events.create') }}" class="px-4 py-2 bg-primary rounded-lg">Create Event</a>
 
-    <div class="rounded-xl shadow-lg overflow-hidden border border-zinc-700">
+    <div class="rounded-xl shadow-lg overflow-hidden border border-zinc-700 mt-6">
         <table class="min-w-full">
             <thead style="background-color: rgba(255, 255, 255, 0.05);">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Event Name
                     </th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Location</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Date</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Status</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Actions
@@ -51,6 +52,7 @@
                     <tr>
                         <td class="px-6 py-4 text-sm text-gray-400">{{ $loop->iteration }}</td>
                         <td class="px-6 py-4 text-sm text-white font-medium">{{ $item->name }}</td>
+                        <td class="px-6 py-4 text-sm text-white font-medium">{{ $item->location ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm text-gray-400">{{ $item->created_at }}</td>
                         <td class="px-6 py-4 text-sm">
                             @if ($item->status == 'draft')

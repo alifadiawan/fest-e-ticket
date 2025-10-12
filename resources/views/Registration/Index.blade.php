@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
 </head>
 
 <body class="min-h-screen bg-gray-50 flex items-center justify-center relative overflow-hidden">
@@ -20,7 +20,7 @@
 
         <div class="relative mb-12 flex justify-center">
             <img src="https://futurepreneursummit.com/build/assets/Logo-FEST-LIGHT-BTlW9aSe.png" alt="Logo"
-                class="relative z-10 scale-95 lg:scale-150x      transition-transform duration-300 hover:scale-175" />
+                class="relative z-10 scale-95 lg:scale-150x transition-transform duration-300 hover:scale-105" />
         </div>
 
         @if(isset($error))
@@ -34,6 +34,8 @@
             </div>
         @endif
 
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Join the Summit!</h2>
+        <p class="text-gray-500 text-sm mb-8">Register easily using your Google account or manually below.</p>
 
         @if(isset($error))
 
@@ -60,30 +62,15 @@
             </a>
         @endif
 
-        <form id="manualForm" action="" method="POST" class="space-y-4 hidden">
-            @csrf
-            <div>
-                <label for="name" class="block text-sm font-medium text-gray-700 text-left">Name</label>
-                <input type="text" name="name" id="name" required
-                    class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            </div>
+        <div class="flex items-center my-6">    
+            <hr class="flex-grow border-gray-300">
+        </div>
 
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 text-left">Email</label>
-                <input type="email" name="email" id="email" required
-                    class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            </div>
+        <p class="mt-6 text-sm text-gray-500">
+            Terdapat Masalah? <a href="#" class="text-purple-500 font-medium hover:underline">Hubungi Kami</a>
+        </p>
 
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700 text-left">Password</label>
-                <input type="password" name="password" id="password" required
-                    class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-            </div>
 
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-                Register
-            </button>
-        </form>
     </div>
 
     <script>
