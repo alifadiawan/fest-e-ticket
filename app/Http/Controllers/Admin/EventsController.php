@@ -15,7 +15,7 @@ class EventsController extends Controller
 {
     public function index()
     {
-        $events = EventModel::paginate(10);
+    $events = EventModel::where('status', '!=', 'deleted')->paginate(10);
 
         return view('Events.Index', compact('events'));
     }
@@ -110,7 +110,13 @@ class EventsController extends Controller
         return redirect()->route('events.index')->with('success', 'Event Updated Successfully');
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $event = EventModel::find($id);
+        $event->status = 'deleted';
+        $event->save();
+
+        return redirect()->route('events.index')->with('success', 'Event Deleted Successfully'); 
+
     }
 }

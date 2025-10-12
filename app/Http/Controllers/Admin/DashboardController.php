@@ -28,6 +28,8 @@ class DashboardController extends Controller
     }
 
     public function analytics(){
+
+        
         return view('Dashboard.Overview');
     }
 

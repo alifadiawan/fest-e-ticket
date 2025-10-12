@@ -18,6 +18,7 @@ class EventModel extends Model
     const ARCHIVED = 'archived';
     const UPCOMING = 'upcoming';
     const PASSED = 'passed';
+    const DELETED = 'deleted';
 
     public static function statuses(): array
     {

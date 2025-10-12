@@ -2,46 +2,72 @@
 @section('page-title', $user->name)
 @section('content')
 
-    <div class="card bg-primary p-6 rounded-xl mb-12">
+    <div class="card bg-primary text-white p-6 rounded-2xl shadow-md mb-12">
+        <!-- Top Section: Basic Info + Action -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <!-- Left: User Info -->
+            <div>
+                <h1 class="text-2xl font-semibold mb-1">{{ $user->email }}</h1>
+                <p class="text-sm text-zinc-400 mb-4">
+                    Akun dibuat pada: <span class="text-zinc-300">{{ $user->created_at->format('d M Y') }}</span>
+                </p>
 
-        <div class="first mb-12">
-            <h1 class="font-bold text-2xl">{{ $user->email }}</h1>
-            <p class="text-zinc-500">Akun dibuat pada Tanggal : {{ $user->created_at }}</p>
+                <div class="space-y-1 text-base">
+                    <p><span class="text-zinc-400">No. Telp:</span> {{ $user->no_telp }}</p>
+                    <p><span class="text-zinc-400">Kampus:</span> {{ $user->asal_kampus ?? '-' }}</p>
+                </div>
+            </div>
 
+            <!-- Right: Quick Actions -->
+            <div class="flex flex-col md:items-end gap-3">
+                <div class="flex flex-wrap gap-2">
+                    <a href="https://wa.me/+62{{ $user->no_telp }}" target="_blank"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg border border-green-500 text-green-400 hover:bg-green-500 hover:text-white transition">
+                        <x-lucide-message-circle class="h-5 w-5" />
+                        Whatsapp
+                    </a>
+
+                    <a href="mailto:{{ $user->email }}" target="_blank"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent hover:bg-accent hover:text-white transition">
+                        <x-lucide-mail class="h-5 w-5" />
+                        Email
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <button onclick="navigator.clipboard.writeText('{{ $user->email }}')"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-700 hover:bg-zinc-600 transition text-sm">
+                        <x-lucide-copy class="h-4 w-4" />
+                        Copy Email
+                    </button>
+
+                    <button onclick="navigator.clipboard.writeText('https://wa.me/+62{{ $user->no_telp }}')"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-700 hover:bg-zinc-600 transition text-sm">
+                        <x-lucide-copy class="h-4 w-4" />
+                        Copy WhatsApp Link
+                    </button>
+
+                    <a href=""
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent transition text-sm text-zinc-800">
+                        <x-lucide-pencil class="h-4 w-4" />
+                        Edit User
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="second mb-12">
-            <p>{{ $user->no_telp }}</p>
-            <p>{{ $user->asal_kampus ?? '-' }}</p>
+
+        <!-- Divider -->
+        <div class="border-t border-zinc-700 my-6"></div>
+
+        <!-- Warning Section -->
+        <div class="text-sm text-zinc-400">
+            <span class="text-red-500">*</span> Mengirim pesan manual dengan WhatsApp dapat berujung pemblokiran nomor
+            pengirim dari Facebook. Gunakan dengan bijak.
+            <a href="https://faq.whatsapp.com/465883178708358/?helpref=hc_fnav" target="_blank"
+                class="underline hover:text-zinc-300 ml-1">Baca disini</a>
         </div>
-
-        <div class="third flex flex-row gap-2 mb-2">
-            <a href="https://wa.me/+62{{ $user->no_telp }}" target="_blank"
-                class="flex items-center gap-2 px-4 py-2 rounded-lg border border-green-500 text-green-600 hover:bg-green-500 hover:text-white transition">
-                <x-lucide-message-circle class="h-5 w-5" />
-                Whatsapp
-                <x-lucide-arrow-up-right class="h-4 w-4 opacity-70" />
-            </a>
-
-            <a href="mailto:{{ $user->email }}" target="_blank"
-                class="flex items-center gap-2 px-4 py-2 rounded-lg border border-accent text-accent hover:bg-accent hover:text-white transition">
-                <x-lucide-mail class="h-5 w-5" />
-                Email
-                <x-lucide-arrow-up-right class="h-4 w-4 opacity-70" />
-            </a>
-        </div>
-
-        <div class="warning">
-            <p class="text-sm text-zinc-500">
-                <span class="text-red-500 text-xs">*</span>
-                Mengirim pesan manual dengan Whatsapp dapat berujung pemblokiran nomor pengirim dari Facebook. Gunakan
-                dengan bijak !
-                <br>
-                <a href="https://faq.whatsapp.com/465883178708358/?helpref=hc_fnav" target="_blank"
-                    class="underline hover:text-zinc-400">baca disini</a>
-            </p>
-        </div>
-
     </div>
+
 
     <h1 class="font-bold text-2xl mb-5 ">Event Terdaftar</h1>
     <div class="rounded-xl shadow-lg overflow-hidden border border-zinc-700">

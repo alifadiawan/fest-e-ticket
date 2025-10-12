@@ -36,6 +36,7 @@ Route::post('/events/store', [EventsController::class, 'store'])->name('events.s
 Route::get('/events/show/{id}', [EventsController::class, 'show'])->name('events.show');
 Route::get('/events/edit/{id}', [EventsController::class, 'edit'])->name('events.edit');
 Route::POST('/events/update/{id}', [EventsController::class, 'update'])->name('events.update');
+Route::DELETE('/events/delete/{id}', [EventsController::class, 'delete'])->name('events.delete');
 
 
 /************

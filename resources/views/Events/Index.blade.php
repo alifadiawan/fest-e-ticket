@@ -40,7 +40,8 @@
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Event Name
                     </th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Location</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Location
+                    </th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Date</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Status</th>
                     <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Actions
@@ -73,6 +74,14 @@
                         <td class="px-6 py-4 text-sm font-medium space-x-4">
                             <a href="{{ route('events.show', $item->id) }}" class="text-blue-400 hover:text-blue-300">View</a>
                             <a href="{{ route('events.edit', $item->id) }}" class="text-purple-400 hover:text-blue-300">Edit</a>
+                            <form action="{{ route('events.delete', $item->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this event?')" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="ms-5 text-zinc-700 hover:text-red-500 font-semibold">
+                                    Trash
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

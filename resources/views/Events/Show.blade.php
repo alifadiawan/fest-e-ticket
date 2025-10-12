@@ -91,34 +91,9 @@
         </table>
     </div>
     
-    <h2 class="text-2xl font-bold text-white mb-4 mt-4">Analytics</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <div class="rounded-xl p-6 bg-primary">
-            <h3 class="text-lg font-semibold text-gray-300 mb-4">User Registrations (Last 7 Days)</h3>
-            <div class="w-full h-64 flex items-end justify-between space-x-2">
-                <div class="w-1/6 h-1/3 bg-green-500 rounded-t-md opacity-75"></div>
-                <div class="w-1/6 h-2/3 bg-green-500 rounded-t-md"></div>
-                <div class="w-1/6 h-1/2 bg-green-500 rounded-t-md opacity-75"></div>
-                <div class="w-1/6 h-3/4 bg-green-500 rounded-t-md"></div>
-                <div class="w-1/6 h-2/5 bg-green-500 rounded-t-md opacity-75"></div>
-                <div class="w-1/6 h-5/6 bg-green-500 rounded-t-md"></div>
-                <div class="w-1/6 h-1/2 bg-green-500 rounded-t-md opacity-75"></div>
-            </div>
-        </div>
-        <div class="rounded-xl p-6 bg-primary">
-            <h3 class="text-lg font-semibold text-gray-300 mb-4">Token Claim Rate</h3>
-            <div class="w-full h-64">
-                <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 200 100"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M 10 80 C 40 20, 60 20, 90 60 S 150 100, 190 70" class="stroke-indigo-400"></path>
-                    <circle cx="10" cy="80" r="2" class="fill-indigo-400"></circle>
-                    <circle cx="90" cy="60" r="2" class="fill-indigo-400"></circle>
-                    <circle cx="190" cy="70" r="2" class="fill-indigo-400"></circle>
-                </svg>
-            </div>
-        </div>
-    </div>
+    <h2 class="text-2xl font-bold text-white mb-4 mt-4">Certificates</h2>
+    
+    
 
     <h2 class="text-2xl font-bold text-white mb-4">All Users Registration</h2>
 
