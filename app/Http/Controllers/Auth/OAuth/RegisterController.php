@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\RegistrationModel;
 use App\Models\TokenModel;
 use App\Models\User;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -19,7 +22,11 @@ class RegisterController extends Controller
             return redirect()->back()->with('error', 'Google session expired');
         }
 
-        return view('Registration.Register', compact('googleData'));
+        $campus = Cache::remember('campus_list', 3600, function () {
+            return DB::table('campus')->select('id', 'campus_name', 'alamat', 'kota')->get();
+        });
+
+        return view('Registration.Register', compact('googleData', 'campus'));
     }
     public function storeUserFromGoogle(Request $request)
     {
@@ -36,7 +43,7 @@ class RegisterController extends Controller
 
         // Buat user baru
         $user = User::create([
-            'name' => $googleData['name'],
+            'name' => $request->input('name'),
             'email' => $googleData['email'],
             'google_id' => $googleData['google_id'],
             'asal_kampus' => $request->asal_kampus,

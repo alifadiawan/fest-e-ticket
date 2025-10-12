@@ -5,25 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css'])
 </head>
 
-<body class="min-h-screen bg-gray-50 flex items-center justify-center relative overflow-hidden">
+<body class="min-h-screen bg-gray-50 flex items-center justify-center relative">
     <div class="absolute inset-0">
         <img src="https://futurepreneursummit.com/build/assets/bg-slider-DVH2vyx0.webp" alt="Background"
             class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-black/50"></div>
     </div>
 
-    <div id="registrationCard"
-        class="relative w-full max-w-md sm:max-w-lg px-6 py-8 
-         bg-white/80 backdrop-blur-lg border border-white/30 
+    <div id="registrationCard" class="w-80 lg:min-w-lg my-12 px-6 py-8 
+         bg-white border border-white/30 
          rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] 
          z-10 text-center transition-all duration-500 ease-out">
 
         <div class="relative mb-12 flex justify-center">
             <img src="https://futurepreneursummit.com/build/assets/Logo-FEST-LIGHT-BTlW9aSe.png" alt="Logo"
-                class="relative z-10 scale-95 lg:scale-150x transition-transform duration-300 hover:scale-175" />
+                class="relative z-10 scale-95 transition-transform duration-300" />
         </div>
 
         <h1 class="text-xl font-bold mb-4">Complete Your Registration</h1>
@@ -51,13 +50,6 @@
             </div>
 
             <div class="mb-5">
-                <label class="text-start block text-sm font-medium text-gray-700 mb-2">Name</label>
-                <input type="text" name="name" value="{{ $googleData['name'] }}" readonly
-                    class="w-full border  border-gray-300 rounded-lg p-3 bg-gray-50 text-zinc-400 text-sm focus:outline-none cursor-not-allowed"
-                    readonly>
-            </div>
-
-            <div class="mb-5">
                 <label class="text-start block text-sm font-medium text-gray-700 mb-2">Email</label>
                 <input type="email" name="email" value="{{ $googleData['email'] }}" readonly
                     class="w-full border border-gray-300 rounded-lg p-3 bg-gray-50 text-zinc-400 text-sm focus:outline-none cursor-not-allowed"
@@ -65,31 +57,49 @@
             </div>
 
             <div class="mb-5">
-                <label class="text-start block text-sm font-medium text-gray-700 mb-2">
-                    Campus <span class="text-red-500">*</span>
-                </label>
-                <input type="text" name="asal_kampus" value="{{ old('asal_kampus') }}"
-                    class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
-                    required placeholder="Enter your campus name">
-                @error('campus')
-                    <p class="text-red-500 text-xs mt-2 flex items-start">
-                        <svg class="w-4 h-4 mr-1 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        {{ $message }}
+                <div class="flex flex-col text-start label mb-2">
+                    <label for="nama" class="block text-sm font-semibold text-gray-800 mb-1">
+                        Nama
+                    </label>
+                    <p class="text-xs text-gray-400">
+                        Nama ini akan dicetak pada sertifikat. Pastikan penulisan sudah benar. <span
+                            class="text-red-500">*</span>
                     </p>
-                @enderror
+                </div>
+                <input type="text" name="name" value="{{ $googleData['name'] }}"
+                    class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow">
+            </div>
+
+            <div class="mb-5 text-start">
+                <label for="campus-select" class="block text-sm font-medium text-gray-700 mb-2">
+                    Kampus <span class="text-red-500">*</span>
+                </label>
+
+                <input list="campus-list" id="campus-select" name="asal_kampus" value="{{ old('asal_kampus') }}"
+                    required placeholder="Ketik atau pilih nama kampus"
+                    class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow">
+
+                <datalist id="campus-list">
+                    @foreach($campus as $item)
+                        <option value="{{ $item->campus_name }}"></option>
+                    @endforeach
+                </datalist>
             </div>
 
             <div class="mb-6">
-                <label class="text-start block text-sm font-medium text-gray-700 mb-2">
-                    No Telp <span class="text-red-500">*</span>
-                </label>
+                <div class="flex flex-col text-start label mb-2">
+                    <label for="no_telp" class="block text-sm font-semibold text-gray-800 mb-1">
+                        No. Telepon
+                    </label>
+                    <p class="text-xs text-gray-400">
+                        Pastikan nomor telepon aktif agar kami bisa menghubungi Anda jika ada pertanyaan atau informasi
+                        penting.
+                        <span class="text-red-500">*</span>
+                    </p>
+                </div>
                 <input type="text" name="no_telp" value="{{ old('no_telp') }}"
                     class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
-                    required placeholder="Enter your phone number">
+                    required placeholder="0831...">
                 @error('no_telp')
                     <p class="text-red-500 text-xs mt-2 flex items-start">
                         <svg class="w-4 h-4 mr-1 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -110,7 +120,6 @@
                 Claim E-Ticket
             </button>
         </form>
-
 
     </div>
 </body>
