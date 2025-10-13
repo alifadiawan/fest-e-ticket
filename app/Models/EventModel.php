@@ -58,7 +58,14 @@ class EventModel extends Model
         return $this->hasMany(TokenModel::class, 'event_id', 'id');
     }
 
-    public function users(){
+    public function registrations()
+    {
+        return $this->hasMany(RegistrationModel::class, 'event_id');
+    }
+
+
+    public function users()
+    {
         return $this->belongsToMany(User::class);
     }
 }

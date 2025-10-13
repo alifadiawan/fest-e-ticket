@@ -80,7 +80,7 @@
                 @foreach ($events as $item)
                     <!-- Event Card -->
                     <a href="{{ route('events.show', $item->id) }}">
-                        <div class="bg-black rounded-xl shadow hover:scale-103 transform transition">
+                        <div class="bg-black rounded-xl min-h-full shadow hover:scale-103 transform transition">
                             <div class="flex flex-col bg-secondary p-4 rounded-t-xl">
                                 <h4 class="text-white font-bold text-lg">{{ $item->name }}</h4>
                                 <p class="text-gray-400 text-sm">{{ $item->location }}</p>
