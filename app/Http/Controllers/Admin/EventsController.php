@@ -15,9 +15,14 @@ class EventsController extends Controller
 {
     public function index()
     {
-    $events = EventModel::where('status', '!=', 'deleted')->paginate(10);
+        $events = EventModel::where('status', '!=', 'deleted')->paginate(10);
 
-        return view('Events.Index', compact('events'));
+        // stats
+        $totalEvent = EventModel::count();
+        $passedEvent = EventModel::where('status', '=', 'passed')->count();
+        $liveEvent = EventModel::where('status', '=', 'published')->count();
+
+        return view('Events.Index', compact('events', 'totalEvent', 'passedEvent', 'liveEvent'));
     }
 
     public function create()
@@ -116,7 +121,7 @@ class EventsController extends Controller
         $event->status = 'deleted';
         $event->save();
 
-        return redirect()->route('events.index')->with('success', 'Event Deleted Successfully'); 
+        return redirect()->route('events.index')->with('success', 'Event Deleted Successfully');
 
     }
 }

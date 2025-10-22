@@ -3,8 +3,6 @@
 @section('content')
 
 
-
-
     {{-- Summary Cards --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div class="bg-primary-light rounded-xl p-5 shadow hover:shadow-accent/20 hover:scale-[1.02] transition">

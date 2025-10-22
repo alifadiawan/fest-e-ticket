@@ -3,15 +3,15 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <div class="rounded-xl shadow-lg p-6 bg-primary">
             <h2 class="text-lg font-semibold text-gray-400">Total Events</h2>
-            <p class="text-4xl font-extrabold text-indigo-400 mt-2">5</p>
+            <p class="text-4xl font-extrabold text-indigo-400 mt-2">{{ $totalEvent }}</p>
         </div>
         <div class="rounded-xl shadow-lg p-6 bg-primary">
-            <h2 class="text-lg font-semibold text-gray-400">Upcoming Events</h2>
-            <p class="text-4xl font-extrabold text-green-400 mt-2">3</p>
+            <h2 class="text-lg font-semibold text-gray-400">Live Events</h2>
+            <p class="text-4xl font-extrabold text-green-400 mt-2">{{ $liveEvent }}</p>
         </div>
         <div class="rounded-xl shadow-lg p-6 bg-primary">
             <h2 class="text-lg font-semibold text-gray-400">Past Events</h2>
-            <p class="text-4xl font-extrabold text-gray-500 mt-2">2</p>
+            <p class="text-4xl font-extrabold text-gray-500 mt-2">{{ $passedEvent }}</p>
         </div>
     </div>
 

@@ -22,10 +22,11 @@ class ClaimTokenController extends Controller
         }
 
         if ($usertoken->status === 'used') {
-            return view('Registration.Index', [
+            return view('Registration.Result', [
                 'token' => $token,
-                'error' => 'Token Sudah Pernah Digunakan'
+                'token_credentials' => $usertoken
             ]);
+            
         }
 
         // Cek apakah H+10 dari start_date sudah lewat
@@ -34,7 +35,7 @@ class ClaimTokenController extends Controller
         $endDatePlus10 = Carbon::parse($usertoken->end_date)->addDays(10);
 
         if ($now->greaterThan($startDatePlus10) || $now->greaterThan($endDatePlus10)) {
-            return view('Registration.Index', [
+            return view('Registration.Result', [
                 'token' => $token,
                 'status' => 'passed'
             ]);
