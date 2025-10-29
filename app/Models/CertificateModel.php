@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class CertificateModel extends Model
 {
     protected $table = 'certificate';
+    protected $guarded = [];
     
 }

@@ -90,10 +90,66 @@
             </tbody>
         </table>
     </div>
-    
-    <h2 class="text-2xl font-bold text-white mb-4 mt-4">Certificates</h2>
-    
-    
+
+    <div class="flex flex-row justify-between items-center mb-4 mt-6">
+        <h2 class="text-2xl font-bold text-white">Certificates</h2>
+        <a href="{{ route('certificate.create', $event->id) }}" class="px-4 py-2 bg-purple-500 rounded-lg">Generate
+            Cercitificate</a>
+    </div>
+    <div class="rounded-xl shadow-lg overflow-hidden border border-zinc-700 mb-5">
+        <table class="min-w-full">
+            <thead style="background-color: rgba(255, 255, 255, 0.05);">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">#</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Token Count
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Preview
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Created at
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-700">
+                @forelse ($allCertificate as $item)
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">{{ $item->certificate_name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
+                            @if ($item->path)
+                                <img src="{{ asset('storage/' . $item->path) }}" alt="Certificate Preview"
+                                    class="w-32 h-32 object-cover border border-gray-700 rounded-lg shadow-sm hover:scale-105 transition duration-200">
+                            @else
+                                <span class="text-gray-400">No file</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $item->created_at }}</td>
+                        <td class="px-6 py-4 text-sm font-medium space-x-4">
+                            <a href="" class="text-yellow-400 hover:text-yellow-300">Edit</a>
+                            <a href="" class="text-blue-400 hover:text-blue-300">View</a>
+                            <form
+                                action="{{ route('certificate.delete', ['event_id' => $event->id, 'certificate_id' => $item->id]) }}"
+                                method="POST" onsubmit="return confirm('Are you sure you want to delete this certificate?');"
+                                class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-400 hover:text-red-300">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="px-6 py-6 text-center whitespace-nowrap text-sm text-zinc-400">No Certificate
+                            Yet </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
 
     <h2 class="text-2xl font-bold text-white mb-4">All Users Registration</h2>
 

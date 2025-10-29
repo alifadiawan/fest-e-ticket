@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\OAuth\GoogleController;
 use App\Http\Controllers\Auth\OAuth\RegisterController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\Tokens\ClaimTokenController;
 use App\Http\Controllers\Tokens\GenerateTokenController;
 use App\Models\EventModel;
@@ -74,6 +75,13 @@ Route::get('/events/{event_id}/token/{batch_id}', [TokenController::class, 'show
 Route::get('/tokens/{event_id}/{batch_id}/download', [TokenController::class, 'download'])->name('tokens.download');
 
 
+/************
+ * Certificate
+ *************/
+Route::get('/event/{event_id}/certificate/create', [CertificateController::class, 'create'])->name('certificate.create');
+Route::post('/event/{event_id}/certificate/store', [CertificateController::class, 'store'])->name('certificate.store');
+Route::put('/event/{event_id}/certificate/update/{certificate_id}', [CertificateController::class, 'update'])->name('certificate.update');
+Route::delete('/event/{event_id}/certificate/delete/{certificate_id}', [CertificateController::class, 'delete'])->name('certificate.delete');
 
 
 /************

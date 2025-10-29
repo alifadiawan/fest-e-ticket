@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CertificateModel;
 use App\Models\EventModel;
 use App\Models\RegistrationModel;
 use App\Models\TokenBatchModel;
@@ -63,6 +64,9 @@ class EventsController extends Controller
         $TokenClaimed = TokenModel::where('status', '=', 'used')
             ->where('event_id', '=', $id)->count();
 
+        // certificates
+        $allCertificate = CertificateModel::where('event_id', '=', $id)->get();
+
         // search
         $search = $request->input('search');
 
@@ -78,7 +82,7 @@ class EventsController extends Controller
             ->paginate(20)
             ->appends(['search' => $search]);
 
-        return view('Events.Show', compact('event', 'TokenHistory', 'RegisteredUsersCount', 'TokenClaimed', 'TotalToken', 'RegisteredUsers', 'search'));
+        return view('Events.Show', compact('event', 'TokenHistory', 'RegisteredUsersCount', 'TokenClaimed', 'TotalToken', 'RegisteredUsers', 'search', 'allCertificate'));
     }
 
     public function edit($id)
