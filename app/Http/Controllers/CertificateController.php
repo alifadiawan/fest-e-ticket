@@ -6,6 +6,7 @@ use App\Models\CertificateModel;
 use App\Models\EventModel;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CertificateController extends Controller
@@ -13,8 +14,8 @@ class CertificateController extends Controller
     public function create()
     {
         $event = DB::table('events')
-                    ->select('id', 'name')
-                    ->get();
+            ->select('id', 'name')
+            ->get();
 
         return view('Certificate.Create', compact('event'));
     }
@@ -43,15 +44,33 @@ class CertificateController extends Controller
             'storage_disk' => 'public',
         ]);
 
-       return redirect()->route('events.show', $request->event_id)->with('success', 'certificate added !');
+        return redirect()->route('events.show', $request->event_id)->with('success', 'certificate added !');
     }
 
     public function update()
     {
     }
-    public function delete()
+    public function delete($event_id, $certificate_id)
     {
+        // Find the certificate
+        $certificate = CertificateModel::where('id', '=',$certificate_id)
+            ->where('event_id', $event_id)
+            ->firstOrFail();
+
+        // Delete file from storage if exists
+        if ($certificate->path && Storage::disk($certificate->storage_disk)->exists($certificate->path)) {
+            Storage::disk($certificate->storage_disk)->delete($certificate->path);
+        }
+
+        // Delete record from database
+        $certificate->delete();
+
+        // Redirect back to event page with success message
+        return redirect()
+            ->route('events.show', $event_id)
+            ->with('success', 'Certificate deleted successfully!');
     }
+    
     public function generate()
     {
     }

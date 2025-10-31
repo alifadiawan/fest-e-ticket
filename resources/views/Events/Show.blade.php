@@ -94,8 +94,21 @@
     <div class="flex flex-row justify-between items-center mb-4 mt-6">
         <h2 class="text-2xl font-bold text-white">Certificates</h2>
         <a href="{{ route('certificate.create', $event->id) }}" class="px-4 py-2 bg-purple-500 rounded-lg">Generate
-            Cercitificate</a>
+            Certificate</a>
     </div>
+
+    @if (session('success'))
+        <div class="mb-4 flex items-center gap-2 rounded-lg bg-green-100 border border-green-400 text-green-800 px-4 py-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2l4-4m5 2a9 9 0 11-18 0a9 9 0 0118 0z" />
+            </svg>
+            <span>{{ session('success') }}</span>
+        </div>
+    @endif
+
+
     <div class="rounded-xl shadow-lg overflow-hidden border border-zinc-700 mb-5">
         <table class="min-w-full">
             <thead style="background-color: rgba(255, 255, 255, 0.05);">
@@ -119,7 +132,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
                             @if ($item->path)
                                 <img src="{{ asset('storage/' . $item->path) }}" alt="Certificate Preview"
-                                    class="w-32 h-32 object-cover border border-gray-700 rounded-lg shadow-sm hover:scale-105 transition duration-200">
+                                    class="w-40 h-20 object-fit border border-gray-700 rounded-lg shadow-sm hover:scale-105 transition duration-200">
                             @else
                                 <span class="text-gray-400">No file</span>
                             @endif
@@ -127,7 +140,8 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $item->created_at }}</td>
                         <td class="px-6 py-4 text-sm font-medium space-x-4">
                             <a href="" class="text-yellow-400 hover:text-yellow-300">Edit</a>
-                            <a href="" class="text-blue-400 hover:text-blue-300">View</a>
+                            <a onclick="openModal('viewCertificate{{ $item->id }}')"
+                                class="text-blue-400 hover:text-blue-300">View</a>
                             <form
                                 action="{{ route('certificate.delete', ['event_id' => $event->id, 'certificate_id' => $item->id]) }}"
                                 method="POST" onsubmit="return confirm('Are you sure you want to delete this certificate?');"
@@ -140,6 +154,16 @@
                             </form>
                         </td>
                     </tr>
+
+                    <x-modal id="viewCertificate{{ $item->id }}" title="{{ $item->certificate_name }}">
+                        @if ($item->path)
+                            <img src="{{ asset('storage/' . $item->path) }}" alt="Certificate Preview"
+                                class="w-full h-64 object-fit border border-gray-700 rounded-lg shadow-sm transition duration-200">
+                        @else
+                            <span class="text-gray-400">No file</span>
+                        @endif
+                    </x-modal>
+
                 @empty
                     <tr>
                         <td colspan="4" class="px-6 py-6 text-center whitespace-nowrap text-sm text-zinc-400">No Certificate
