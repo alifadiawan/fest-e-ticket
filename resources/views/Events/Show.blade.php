@@ -132,7 +132,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-white">
                             @if ($item->path)
                                 <img src="{{ asset('storage/' . $item->path) }}" alt="Certificate Preview"
-                                    class="w-40 h-20 object-fit border border-gray-700 rounded-lg shadow-sm hover:scale-105 transition duration-200">
+                                    class="w-40 h-20 object-fit border border-gray-700 rounded-lg shadow-sm transition duration-200">
                             @else
                                 <span class="text-gray-400">No file</span>
                             @endif

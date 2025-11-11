@@ -52,20 +52,16 @@ class CertificateController extends Controller
     }
     public function delete($event_id, $certificate_id)
     {
-        // Find the certificate
         $certificate = CertificateModel::where('id', '=',$certificate_id)
             ->where('event_id', $event_id)
             ->firstOrFail();
 
-        // Delete file from storage if exists
         if ($certificate->path && Storage::disk($certificate->storage_disk)->exists($certificate->path)) {
             Storage::disk($certificate->storage_disk)->delete($certificate->path);
         }
 
-        // Delete record from database
         $certificate->delete();
 
-        // Redirect back to event page with success message
         return redirect()
             ->route('events.show', $event_id)
             ->with('success', 'Certificate deleted successfully!');
