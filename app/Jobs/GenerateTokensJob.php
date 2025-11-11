@@ -55,7 +55,7 @@ class GenerateTokensJob implements ShouldQueue
 
             // Generate with small buffer for collision safety
             $targetCount = $this->count;
-            $generateCount = (int) ceil($targetCount * 1.05); // 5% buffer
+            $generateCount = (int) ceil($targetCount * 1.05); 
 
             while (count($tokens) < $targetCount) {
                 $needed = $generateCount - count($tokens);
@@ -74,7 +74,7 @@ class GenerateTokensJob implements ShouldQueue
                     }
                 }
 
-                // Safety check - should rarely hit this
+                // Safety check 
                 if ($needed > $targetCount * 5) {
                     throw new \RuntimeException(
                         "Token generation inefficient. Increase token length from {$this->tokenLength}"
@@ -82,7 +82,6 @@ class GenerateTokensJob implements ShouldQueue
                 }
             }
 
-            // Single-query batch insert - optimal for 200-8000 tokens
             $now = now();
             $values = [];
             $bindings = [];
@@ -99,7 +98,6 @@ class GenerateTokensJob implements ShouldQueue
 
             $valuesStr = implode(', ', $values);
 
-            // Execute single INSERT with all tokens
             DB::insert(
                 "INSERT INTO tokens (id, event_id, token, batch_id, status, created_at) 
              VALUES {$valuesStr}",
