@@ -67,7 +67,7 @@
         </div>
 
         <p class="mt-6 text-sm text-gray-500">
-            Terdapat Masalah? <a href="#" class="text-purple-500 font-medium hover:underline">Hubungi Kami</a>
+            Terdapat Masalah? <a href="#" class="text-purple-500 font-medium hover:underline">Lihat Pandunan</a>
         </p>
 
 

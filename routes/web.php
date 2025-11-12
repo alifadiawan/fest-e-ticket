@@ -45,7 +45,7 @@ Route::DELETE('/events/delete/{id}', [EventsController::class, 'delete'])->name(
  *************/
 Route::post('/token/generate/{event_id}', [GenerateTokenController::class, 'generateTokens'])->name('generate.token');
 Route::get('/redeem/{token}', [ClaimTokenController::class, 'view'])->name('tokens.redeem');
-Route::get('/redeem/token/success', [ClaimTokenController::class, 'successView'])->name('tokens.success');
+Route::get('/redeem/token/success/', [ClaimTokenController::class, 'successView'])->name('tokens.success');
 
 
 /************

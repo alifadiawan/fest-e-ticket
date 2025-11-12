@@ -1,225 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Ticket</title>
-  <style>
-    /* 1. Color Palette for Light Mode */
-    :root {
-      --orange-wheel: #FF810D;
-      --orange-peel: #FE9D18;
-      --electric-purple: #BD1FFE;
-      --electric-purple-2: #BA22FF;
-      --text-dark: #1A1A1A;
-      --ticket-bg: #ffffff;
-      --ticket-border: #e0e0e0;
-      --accent-gray: #777;
-      --page-bg-gradient: linear-gradient(135deg, #f9f9ff, #f5f7ff, #fff8f3);
-    }
+  <title>Tiket Event</title>
 
-    /* 2. Basic Body & Layout Setup */
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background: var(--page-bg-gradient);
-      color: var(--text-dark);
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 2rem;
-      box-sizing: border-box;
-    }
+  @vite(['resources/css/app.css'])
 
-    .ticket-container {
-      width: 100%;
-      max-width: 380px;
-      text-align: center;
-    }
-
-    /* 3. Ticket Styling */
-    .ticket {
-      background: var(--ticket-bg);
-      border-radius: 16px;
-      padding: 2rem;
-      position: relative;
-      border: 1px solid var(--ticket-border);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    /* Semi-circle notches */
-    .ticket::before,
-    .ticket::after {
-      content: '';
-      position: absolute;
-      width: 32px;
-      height: 32px;
-      background: var(--page-bg-gradient);
-      border-radius: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .ticket::before {
-      left: -16px;
-    }
-
-    .ticket::after {
-      right: -16px;
-    }
-
-    /* 4. Ticket Header */
-    .ticket-header h1 {
-      margin: 0;
-      font-size: 2rem;
-      font-weight: bold;
-      background: linear-gradient(90deg, var(--electric-purple), var(--orange-wheel));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .ticket-header p {
-      margin: 0.25rem 0 0;
-      font-size: 1rem;
-      color: var(--accent-gray);
-    }
-
-    /* 5. QR Code */
-    .qr-code {
-      background-color: #ffffff;
-      border: 1px solid #ddd;
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 2rem auto;
-      max-width: 150px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-    
-    .qr-code img {
-      width: 100%;
-      display: block;
-    }
-
-    /* 6. Divider */
-    .ticket-divider {
-      height: 2px;
-      background: repeating-linear-gradient(90deg,
-                  #ccc,
-                  #ccc 10px,
-                  transparent 10px,
-                  transparent 20px);
-      margin: 0 -2rem;
-    }
-
-    /* 7. Ticket Info */
-    .ticket-info {
-      padding-top: 1.5rem;
-      text-align: left;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .ticket-info .item {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .ticket-info .label {
-      font-size: 0.8rem;
-      color: var(--accent-gray);
-    }
-
-    .ticket-info .value {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-dark);
-    }
-
-    /* 8. Buttons */
-    .button-group {
-      margin-top: 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .download-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.9rem 1rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      text-decoration: none;
-    }
-
-    .download-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    .btn-pdf {
-      background: linear-gradient(90deg, var(--electric-purple-2), var(--electric-purple));
-    }
-
-    .btn-png {
-      background: linear-gradient(90deg, var(--orange-peel), var(--orange-wheel));
-    }
-
-    .download-btn svg {
-      width: 20px;
-      height: 20px;
-    }
-  </style>
 </head>
-<body>
 
-  <div class="ticket-container">
-    <div class="ticket">
-      <div class="ticket-header">
-        <h1>Futurepreneur</h1>
-        <p>Conference Pass 2025</p>
+<body class="min-h-screen grid place-items-center p-8 font-sans text-dark bg-cover bg-center bg-no-repeat"
+  style="background-image: url('{{ asset('bg_hiring.png') }}')">
+
+
+  <div id="ticket-card" class="w-full max-w-[450px] mx-auto text-center">
+    <div class="relative bg-white shadow-lg rounded-[2rem] p-8 border border-zinc-200 overflow-hidden">
+
+      <!-- Perforated edge effect (left + right) -->
+      <div class="absolute top-1/2 -left-3 w-6 h-6 bg-zinc-100 rounded-full border border-zinc-300"></div>
+      <div class="absolute top-1/2 -right-3 w-6 h-6 bg-zinc-100 rounded-full border border-zinc-300"></div>
+
+      <!-- Header -->
+      <div class="ticket-header mb-4">
+        <h1 class="text-2xl font-bold text-zinc-800 tracking-tight">E - Ticket</h1>
       </div>
-      
-      <div class="qr-code">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example" alt="QR Code">
+
+      <!-- QR -->
+      <div class="rounded-xl mx-auto my-6 max-w-[240px] border border-zinc-200 p-3 bg-zinc-50">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ZLX2MHD4" alt="Kode QR"
+          class="w-full block rounded-md">
       </div>
 
-      <div class="ticket-divider"></div>
+      <!-- Dotted Line -->
+      <div class="w-full border-t border-dashed border-zinc-300 my-5"></div>
 
-      <div class="ticket-info">
-        <div class="item">
-          <span class="label">Name</span>
-          <span class="value">Alex Doe</span>
+      <!-- Event Name -->
+      <h1 class="font-bold text-xl text-zinc-800 mb-4">
+        {{ $token_credentials->event->name }}
+      </h1>
+
+      <!-- Info Section -->
+      <div class="pt-4 text-left flex flex-col gap-5">
+
+        <!-- Token -->
+        <div class="flex flex-col flex-1">
+          <span class="text-xs text-zinc-400 uppercase tracking-wider font-semibold mb-1">Token</span>
+          <span class="text-lg font-bold text-zinc-800">{{ $token_credentials->token }}</span>
         </div>
-        <div class="item" style="text-align: right;">
-          <span class="label">Date</span>
-          <span class="value">28 OCT 2025</span>
-        </div>
-      </div>
-    </div>
 
-    <div class="button-group">
-      <a href="#" class="download-btn btn-pdf">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-        </svg>
-        <span>PDF</span>
-      </a>
-      <a href="#" class="download-btn btn-png">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-        </svg>
-        <span>PNG</span>
-      </a>
+        <!-- Status -->
+        <div class="flex flex-col">
+          <span class="text-xs text-zinc-400 uppercase tracking-wider font-semibold mb-1">Status</span>
+          <div
+            class="w-fit py-1.5 px-4 bg-[#E8F5E9] text-[#2E7D32] rounded-full text-xs font-semibold uppercase tracking-wide mt-1">
+            {{ $token_credentials->status }}
+          </div>
+        </div>
+
+        <!-- Created -->
+        <div class="flex flex-col flex-1">
+          <span class="text-xs text-zinc-400 uppercase tracking-wider font-semibold mb-1">Dibuat</span>
+          <span class="text-lg font-bold text-zinc-800">{{ $token_credentials->created_at }}</span>
+        </div>
+
+        <div class="mt-8 flex items-center justify-center gap-3">
+          <button id="saveTicket"
+            class="px-5 py-2.5 bg-[#7e22ce] hover:bg-[#6b21a8] text-white font-semibold rounded-full text-sm transition">
+            Save to Device
+          </button>
+          <button id="shareTicket"
+            class="px-5 py-2.5 bg-[#7e22ce] hover:bg-[#6b21a8] text-white font-semibold rounded-full text-sm transition">
+            Share
+          </button>
+        </div>
+
+
+      </div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.13/dist/html2canvas-pro.min.js"></script>
+  <script>
+    const saveBtn = document.getElementById('saveTicket');
+    const shareBtn = document.getElementById('shareTicket');
+    const ticket = document.getElementById('ticket-card');
+
+    // 📸 Save as Image
+    saveBtn.addEventListener('click', async () => {
+      const canvas = await html2canvas(ticket, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        logging: false
+      });
+      const link = document.createElement('a');
+      link.download = 'e-ticket.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+
+    // 📤 Share Ticket (if supported)
+    shareBtn.addEventListener('click', async () => {
+      try {
+        const canvas = await html2canvas(ticket, { scale: 2 });
+        canvas.toBlob(async (blob) => {
+          const file = new File([blob], 'e-ticket.png', { type: 'image/png' });
+          if (navigator.share && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: 'E-Ticket Saya',
+              text: 'Berikut e-ticket saya 🎟️',
+              files: [file]
+            });
+          } else {
+            alert('Fitur share tidak didukung di perangkat ini.');
+          }
+        });
+      } catch (err) {
+        console.error('Gagal membagikan tiket:', err);
+      }
+    });
+  </script>
+
 </body>
+
 </html>

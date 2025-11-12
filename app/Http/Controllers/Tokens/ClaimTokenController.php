@@ -11,8 +11,8 @@ class ClaimTokenController extends Controller
 {
     public function view(Request $request, $token)
     {
-        // Ambil token & cek status 'used'
-        $usertoken = TokenModel::where('token', '=',$token)->first();
+        // Ambil token & cek status
+        $usertoken = TokenModel::with(['event'])->where('token', '=', $token)->first();
 
         if (!$usertoken) {
             return view('Registration.Index', [
@@ -26,7 +26,7 @@ class ClaimTokenController extends Controller
                 'token' => $token,
                 'token_credentials' => $usertoken
             ]);
-            
+
         }
 
         // Cek apakah H+10 dari start_date sudah lewat
@@ -46,8 +46,9 @@ class ClaimTokenController extends Controller
 
         return view('Registration.Index', compact('token'));
     }
-    
-    public function successView(){
-        return view('Registration.Result');
+
+    public function successView()
+    {
+        return view('Registration.Result', compact('token_credentials'));
     }
 }
