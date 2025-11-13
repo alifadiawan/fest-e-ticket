@@ -11,49 +11,51 @@
 
 </head>
 
-<style>
-    body {
-        font-family: 'Inter', sans-serif;
-    }
-</style>
-
 <body>
-    <div class="container w-full">
 
-        <div class="min-h-screen flex flex-col items-center justify-center bg-background">
+    <div class="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-black">
 
-            <!-- Left: Logo / Title -->
-            <div class="bg-secondary rounded-full px-8 py-3 shadow-lg z-50 mb-8">
-                <div class="flex items-center justify-center min-w-[28rem] text-white">
-                    <div class="font-bold text-lg">
-                        LOGIN
-                    </div>
+        <!-- Left: Full-height Image -->
+        <div class="hidden lg:flex items-center justify-center">
+            <img src="{{ asset('bg.png') }}" alt="Background" class="h-full w-full object-cover  shadow-lg">
+        </div>
+
+        <!-- Right: Login Form -->
+        <div class="flex items-center justify-center px-6 py-12">
+            <div
+                class="backdrop-blur-lg rounded-2xl shadow-2xl p-10 w-full max-w-lg transition hover:shadow-violet-500/10">
+
+                <div class="text-start mb-12">
+                    <h1 class="text-5xl font-extrabold text-white tracking-tight">Event Management</h1>
+                    <p class="text-gray-400 text-sm mt-2">Welcome back! Please sign in to continue.</p>
                 </div>
-            </div>
-            
-            <!-- Login Card -->
-            <div class="bg-secondary shadow-lg rounded-4xl p-8 w-full max-w-lg">
 
-                <form action="#" method="POST" class="space-y-6">
+                <form action="{{ route('login') }}" method="POST" class="space-y-7">
+                    @csrf
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-                        <input type="email" id="email" name="email" placeholder="you@example.com"
-                            class="mt-1 block w-full px-4 py-2 bg-[#2A2A2A] border border-[#333333] text-white rounded-full focus:ring-violet-500 focus:border-violet-500 outline-none">
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <input type="email" id="email" name="email" placeholder="enter your email"
+                            class="block w-full px-4 py-2.5 bg-[#2A2A2A] border border-[#333333] text-white rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none transition">
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                        <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
                         <input type="password" id="password" name="password" placeholder="••••••••"
-                            class="mt-1 block w-full px-4 py-2 bg-[#2A2A2A] border border-[#333333] text-white rounded-full focus:ring-violet-500 focus:border-violet-500 outline-none">
+                            class="block w-full px-4 py-2.5 bg-[#2A2A2A] border border-[#333333] text-white rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent outline-none transition">
                     </div>
 
-                    <button type="submit"
-                        class="w-full bg-violet-500 text-background py-2 px-4 mt-5 rounded-full font-semibold hover:scale-103 transition">
-                        Sign In
-                    </button>
+                    <div class="mt-12">
+                        <button type="submit"
+                            class="w-full bg-violet-500 hover:bg-violet-600 text-white py-2.5 rounded-lg font-semibold transition-transform hover:scale-[1.03]">
+                            Sign In
+                        </button>
+                    </div>
+
+                
                 </form>
             </div>
         </div>
+
     </div>
 
 </body>
