@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventsController;
 use App\Http\Controllers\Admin\TokenController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\OAuth\GoogleController;
 use App\Http\Controllers\Auth\OAuth\RegisterController;
 use App\Http\Controllers\CertificateController;
@@ -20,9 +21,8 @@ Route::get('/', function () {
     return redirect('/dashboard/overview');
 });
 
-Route::get('/login', function () {
-    return view('Auth.Login');
-});
+Route::get('/login', [LoginController::class, 'view'])->name('login');
+Route::get('/login/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
 
 Route::get('/dashboard/overview', [DashboardController::class, 'overview'])->name('dashboard.overview');
 Route::get('/dashboard/analytics', [DashboardController::class, 'analytics'])->name('dashboard.analytics');

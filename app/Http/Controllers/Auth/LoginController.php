@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -19,6 +21,14 @@ class LoginController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
+
+        // limit 5 request per 1 menit
+        $throttleKey = Str::lower($request->input('email')) . '|' . $request->ip();
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            return back()->withErrors([
+                'email' => 'Too many login attempts. Please try again later.'
+            ]);
+        }
 
         // Attempt Login
         if (Auth::attempt($data)) {
